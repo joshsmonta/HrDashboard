@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "CanaanIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h2><b>Canaan Farm Personel</b></h2>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>Building 1, 2, 3</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="bldg123Emps"></td>
+                            <td id="bldg123Vac"></td>
+                            <td id="bldg123Total"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                <a id="bldg123" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h4>Building 4, 5, 6</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="bldg456Emps"></td>
+                            <td id="bldg456Vac"></td>
+                            <td id="bldg456Total"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-github-alt"></i>
+                </div>
+                <a id="bldg456" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>Support Team</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="supportEmps"></td>
+                            <td id="supportVac"></td>
+                            <td id="supportTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-optin-monster"></i>
+                </div>
+                <a id="support" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var supportVac = "";
+            var bldg123Vac = "";
+            var bldg456Vac = "";
+
+            function CountSupport() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 18,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("supportEmps").innerHTML = data;
+                    document.getElementById("supportVac").innerHTML = supportVac;
+                    document.getElementById("supportTotal").innerHTML = (data + supportVac);
+                });
+            }
+            function CountBldg456() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 17,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("bldg456Emps").innerHTML = data;
+                    document.getElementById("bldg456Vac").innerHTML = bldg456Vac;
+                    document.getElementById("bldg456Total").innerHTML = (data + bldg456Vac);
+                    CountSupport();
+                });
+            }
+            function CountBldg123() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 16,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("bldg123Emps").innerHTML = data;
+                    document.getElementById("bldg123Vac").innerHTML = bldg123Vac;
+                    document.getElementById("bldg123Total").innerHTML = (data + bldg123Vac);
+                    CountBldg456();
+                });
+            }
+            function CountVacantSupport() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 18,
+                    dataType: "json"
+                }).done(function (data) {
+                    supportVac = data;
+                    CountBldg123();
+                });
+            }
+            function CountVacantBldg456() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 17,
+                    dataType: "json"
+                }).done(function (data) {
+                    bldg456Vac = data;
+                    CountVacantSupport();
+                });
+            }
+            function CountVacantBldg123() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 16,
+                    dataType: "json"
+                }).done(function (data) {
+                    bldg123Vac = data;
+                    CountVacantBldg456();
+                });
+            }
+            CountVacantBldg123();
+
+            $("#bldg123").on("click", function () {
+                window.localStorage.setItem("theDeptId", 16);
+            });
+            $("#bldg456").on("click", function () {
+                window.localStorage.setItem("theDeptId", 17);
+            });
+            $("#support").on("click", function () {
+                window.localStorage.setItem("theDeptId", 18);
+            });
+        });
+    </script>
+}

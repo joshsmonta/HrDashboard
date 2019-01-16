@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewBag.Title = "PosIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header"></section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Open New Position</h3>
+                </div>
+                <div ng-app="createPos" ng-controller="posController">
+                    <div class="box-body">
+                        <form id="newForm" role="form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Position Type:</label>
+                                    <select ng-model="item"
+                                            ng-options="posType.name for posType in positionTypes"
+                                            ng-change="updateSelectBox()"
+                                            id="posType"
+                                            name="posType"
+                                            class="form-control"
+                                            style="width: 100%;">
+                                        <option value="">--Select Type of Employee--</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Standard Job Title:</label>
+                                    <input id="posName" name="posName" type="text" value="" class="form-control" />
+                                </div>
+
+                                <div ng-app="" class="form-group">
+                                    <label>Division:</label>
+                                    <select ng-disabled="!enableDiv"
+                                            ng-model="divItems"
+                                            ng-options="divType.divId as divType.divName for divType in divModel track by divType.divId"
+                                            ng-change="DivisionSelected()"
+                                            id="inDivision" name="inDivision" class="form-control" style="width: 100%;">
+                                        <option value="">--Select Division--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Department:</label>
+                                    <select ng-disabled="!enableDept"
+                                            ng-model="deptItems"
+                                            ng-options="deptType.deptId as deptType.deptName for deptType in deptModel track by deptType.deptId"
+                                            ng-change="DeptSelected()"
+                                            id="inDept" name="inDept" class="form-control" style="width: 100%;">
+                                        <option value="">--Select Department--</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Section:</label>
+                                    <select ng-disabled="!enableSec"
+                                            ng-model="sectItems"
+                                            ng-options="sectType.sectId as sectType.sectName for sectType in sectModel track by sectType.sectId"
+                                            ng-change="SectSelected()"
+                                            id="inSection" name="inSection" class="form-control" style="width: 100%;">
+                                        <option value="">--Select Section--</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Business Unit:</label>
+                                    <select ng-model="BuItems"
+                                            ng-options="BuType.unitId as BuType.unitName for BuType in unitModel track by BuType.unitId"
+                                            ng-change="UnitSelected()"
+                                            id="businessUnit" name="businessUnit" class="form-control" style="width: 100%;">
+                                        <option value="">--Select Business Unit--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="checkbox" ng-disabled="!enableBox" ng-model="checkBoxModel" name="headIndicator" style="display:none" id="headIndicate" />
+                            <input type="text" value="" ng-readonly="checked" style="display:none" id="secretDivId"/>
+                            <input type="text" value="" ng-readonly="checked" style="display:none" id="secretDeptId"/>
+                            <input type="text" value="" ng-readonly="checked" style="display:none" id="secretSectId"/>
+
+                            <div class="col-xs-12">
+                                <button class="btn btn-success btn-flat">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        /* AngularJS */
+        angular.module("createPos", ['ui.bootstrap']).controller('posController', ['$scope', '$http', function ($scope, $http) {
+
+            $scope.positionTypes = [
+                { 'name': 'Rank & File' },
+                { 'name': 'Division Head' },
+                { 'name': 'Department Head' },
+                { 'name': 'Section Head' }
+            ];
+            $scope.divModel = [];
+            $scope.deptModel = [];
+            $scope.sectModel = [];
+            $scope.unitModel = [];
+
+            //select * division
+            $scope.divQuery = function () {
+                $http({
+                    method: 'GET', url: '/api/division'
+                }).then(function (response) {
+                    $scope.divModel = response.data;
+                });
+            };
+            $scope.divQuery();
+
+            $scope.unitQuery = function () {
+                $http({
+                    method: 'GET', url: '/api/businessunit'
+                }).then(function (response) {
+                    $scope.unitModel = response.data;
+                });
+            };
+            $scope.unitQuery();
+
+            //select * from Department where divId == ?
+            $scope.deptQuery = function (divId) {
+                $http({
+                    method: 'GET', url: '/api/department/' + divId
+                }).then(function (response) {
+                    $scope.deptModel = response.data;
+                });
+            };
+
+            //select * from Selcet where deptId == ?
+            $scope.sectQuery = function (deptId) {
+                $http({
+                    method: 'GET', url: '/api/section/' + deptId
+                }).then(function (response) {
+                    $scope.sectModel = response.data;
+                });
+            };
+
+            var divisionId = "";
+            var departmentId = "";
+            var sectionId = "";
+            $scope.DivisionSelected = function () {
+                divisionId = $scope.divItems;
+                $scope.deptQuery(divisionId);
+                $("#secretDivId").val(divisionId);
+                $("#secretDeptId").val(32); // dummy Id for null data
+                $("#secretSectId").val(66);
+            };
+
+            $scope.DeptSelected = function () {
+                departmentId = $scope.deptItems;
+                $scope.sectQuery(departmentId);
+                $("#secretDeptId").val(departmentId);
+                $("#secretSectId").val(66);
+            };
+
+            $scope.SectSelected = function () {
+                sectionId = $scope.sectItems;
+                $("#secretSectId").val(sectionId);
+            };
+
+            $scope.updateSelectBox = function () {
+                if ($scope.item.name == "Regular Employee") {
+                    $("#secretDivId").val("");
+                    $("#secretDeptId").val("");
+                    $("#secretSectId").val("");
+                    $scope.enableDiv = true;
+                    $scope.enableDept = true;
+                    $scope.enableSec = true;
+                    $scope.checkBoxModel = false;
+                } else if ($scope.item.name == "Division Head") {
+                    $("#inDivision").val("");
+                    $('#inDept').val("");
+                    $('#inSection').val("");
+                    $("#secretDivId").val("");
+                    $("#secretDeptId").val(32); // dummy Id for null data
+                    $("#secretSectId").val(66);
+                    $scope.enableDiv = true;
+                    $scope.enableDept = false;
+                    $scope.enableSec = false;
+                    $scope.checkBoxModel = true;
+                } else if ($scope.item.name == "Department Head") {
+                    $("#inDivision").val("");
+                    $('#inDept').val("");
+                    $('#inSection').val("");
+                    $("#secretDivId").val("");
+                    $("#secretDeptId").val("");
+                    $("#secretSectId").val(66);
+                    $scope.enableDiv = true;
+                    $scope.enableDept = true;
+                    $scope.enableSec = false;
+                    $scope.checkBoxModel = true;
+                } else if ($scope.item.name == "Section Head") {
+                    $("#inDivision").val("");
+                    $('#inDept').val("");
+                    $('#inSection').val("");
+                    $("#secretDivId").val("");
+                    $("#secretDeptId").val("");
+                    $("#secretSectId").val("");
+                    $scope.enableDiv = true;
+                    $scope.enableDept = true;
+                    $scope.enableSec = true;
+                    $scope.checkBoxModel = true;
+                }
+            };
+        }]);
+    </script>
+    <script>
+        /* JQuery */
+        $(document).ready(function () {
+            $('#newForm').submit(function (e) {
+                var posName = $("#posName").val();
+                var posType = $("#posType").find(":selected").text();
+                var inDivision = $("#inDivision").find(":selected").text();
+                var inDept = $("#inDept").find(":selected").text();
+                var inSection = $("#inSection").find(":selected").text();
+                var headIndicate = $("#headIndicate").is(":checked");
+                var businessUnit = $("#businessUnit").find(":selected").text();
+                var divId = $("#secretDivId").val();
+                var deptId = $("#secretDeptId").val();
+                var sectId = $("#secretSectId").val();
+
+                var vm = {
+                    "posName": posName,
+                    "posStatus": "Vacant",
+                    "inDivision": inDivision,
+                    "inDept": inDept,
+                    "inSection": inSection,
+                    "posType": posType,
+                    "head": headIndicate,
+                    "businessUnit": businessUnit,
+                    "divId": divId,
+                    "deptId": deptId,
+                    "sectId": sectId
+                };
+
+                $.ajax({
+                    url: "/api/position/",
+                    method: "post",
+                    data: vm
+                }).done(function () {
+                    toastr["success"]("A new position has been opened for application.", "Nice!");
+                    $("#posName").val("");
+                    $("#businessUnit").val("");
+                    $("#inDivision").val("");
+                    $("#inDept").val("");
+                    $("#inSection").val("");
+                    $("#posType").val("");
+                }).fail(function () {
+                    toastr["error"]("Something Unexpected Happened, Contact IT for more info.", "Oh No!");
+                });
+                return false;
+            });
+        });
+    </script>
+}
+

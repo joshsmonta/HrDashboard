@@ -1,0 +1,56 @@
+﻿@using System.Web;
+@using System.Web.Mvc;
+@{
+    Layout = null;
+}
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="~/Content/dist/img/user8-128x128.jpg" class="user-image" alt="User Image">
+                <span class="hidden-xs">Joshua Monta</span>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                    <img src="~/Content/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+
+                    <p>
+                        Joshua Monta - Software Developer
+                        <small>Member since Aug. 2018</small>
+                    </p>
+                </li>
+                <!-- Menu Body -->
+                <li class="user-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                    <div class="pull-left">
+                        <a href="#" class="btn btn-primary btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    }
+}
+
+

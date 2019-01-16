@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "ITDept";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header"></section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h2 id="deptName" class="box-title"></h2>
+                </div>
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Type</th>
+                                <th>Business Unit</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h3 class="box-title">Vacant Positions</h3>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table2" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Position</th>
+                                <th>Type</th>
+                                <th>Business Unit</th>
+                                <th>Button</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var unitId = localStorage.getItem("unitId");
+            var unitName = localStorage.getItem("unitName");
+            var deptId = localStorage.getItem("theDeptId");
+            var IsByBU = localStorage.getItem("byBuIndicator");
+            var activeDeptUrl = "";
+            var vacantDeptUrl = "";
+            if (IsByBU == 0) {
+                activeDeptUrl = "/api/plantilla/dept/" + deptId;
+                vacantDeptUrl = "/api/position/dept/openpos/" + deptId;
+            }
+            else if (IsByBU == 1) {
+                activeDeptUrl = "/api/plantilla/deptunit/" + deptId + "/" + unitId;
+                vacantDeptUrl = "/api/position/deptunit/openpos/" + deptId + "/" + unitId;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/api/department/name/" + deptId,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("deptName").innerHTML = data.deptName;
+            });
+
+            var table = $("#Table").DataTable({
+                ajax: {
+                    url: activeDeptUrl,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id",
+                        render: function (data, type, alphalist) {
+                            return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
+                        }
+                    },
+                    { data: "presentPosition" },
+                    { data: "posType" },
+                    { data: "businessUnit" }
+                ]
+            });
+
+            var table2 = $("#Table2").DataTable({
+                ajax: {
+                    url: vacantDeptUrl,
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "posId" },
+                    { data: "posName" },
+                    { data: "posType" },
+                    { data: "businessUnit" },
+                    {
+                        data: "posId",
+                        render: function (data) {
+                            return "<button class='btn btn-danger js-delete' data-position-id=" + data + ">Deactivate</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#Table").on("click", ".js-delete", function () {
+                var deleteBtn = $(this);
+                bootbox.confirm("Are you sure you want to <b>Deactivate</b> this position?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/position/" + deleteBtn.attr("data-position-id"),
+                            method: "PUT",
+                            data: { "posStatus": "Inactive" },
+                            success: function () {
+                                deleteBtn.parents("tr").remove();
+                                toastr["warning"]("Position ID: " + deleteBtn.attr("data-position-id") + " is now Inactive.", "Attention!");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+

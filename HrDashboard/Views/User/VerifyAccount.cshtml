@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SonicHR| Verification</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Styles.Render("~/Css")
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="../../index2.html"><b>Sonic</b>HRIS</a>
+        </div>
+
+        <div class="register-box-body">
+            <p class="login-box-msg">Validation Message</p>
+            @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+            {
+                <div class="alert alert-success">
+                    <strong>Success! </strong>
+                    Your Account has been successfully Activated.
+                    Click here: <a style="color:blueviolet" href="http://localhost:4428/User/LoginForm">Login</a>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>
+                    @ViewBag.Message
+                </div>
+            }
+        </div>
+        <!-- /.form-box -->
+    </div>
+    @Scripts.Render("~/Js")
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HrDashboard.Models.BetaList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <div class="form-group">
+        <button type="button" class="btn btn-success" style="display:inline-block; float:right" onclick="location.href='@Url.Action("NewBeta", "BetaList")'">
+            <span class="glyphicon glyphicon-plus"></span> Encode
+        </button>
+    </div><br />
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Recruits</h3>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Applicant Name</th>
+                                <th>Position Applied For</th>
+                                <th>Initial Status</th>
+                                <th>HR Screening</th>
+                                <th>Department's Assesment</th>
+                                <th>Examination</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        var table = $("#Table").DataTable({
+            ajax: {
+                url: "/api/betalist",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "id",
+                    render: function (data, type, betalist) {
+                        return "<a href='/betalist/details/" + betalist.id + "'>" + betalist.fName + " " + betalist.mName + " " + betalist.lName + "</a>";
+                    }
+                },
+                { data: "positionApplied" },
+                { data: "initialStatus" },
+                { data: "hrScreening" },
+                { data: "deptAssessment" },
+                { data: "examination" }
+            ]
+        });
+    });
+</script>    
+}

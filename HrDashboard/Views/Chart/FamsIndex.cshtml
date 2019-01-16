@@ -1,0 +1,235 @@
+﻿        
+@{
+    ViewBag.Title = "FamsIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h2><b>FAMS Division</b></h2>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h4>Finance</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="financeEmps"></td>
+                            <td id="financeVac"></td>
+                            <td id="financeTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="finance" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>Accounting Ops</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="acctEmps"></td>
+                            <td id="acctVac"></td>
+                            <td id="acctTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                <a id="acctOps" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h4>Information Tech</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="itEmps"></td>
+                            <td id="itVac"></td>
+                            <td id="itTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-github-alt"></i>
+                </div>
+                <a id="itDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>IPPR</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="ipprEmps"></td>
+                            <td id="ipprVac"></td>
+                            <td id="ipprTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-optin-monster"></i>
+                </div>
+                <a id="ippr" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            
+            var financeVac = "";
+            var acctVac = "";
+            var itVac = "";
+            var ipprVac = "";
+            
+            function GetIpprNumbers() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 4,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("ipprEmps").innerHTML = data;
+                    document.getElementById("ipprVac").innerHTML = ipprVac;
+                    document.getElementById("ipprTotal").innerHTML = (data + ipprVac);
+                });
+            }
+            function GetItNumbers() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 3,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("itEmps").innerHTML = data;
+                    document.getElementById("itVac").innerHTML = itVac;
+                    document.getElementById("itTotal").innerHTML = (data + itVac);
+                    GetIpprNumbers();
+                });
+            }
+            function GetAcctNumbers() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 2,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("acctEmps").innerHTML = data;
+                    document.getElementById("acctVac").innerHTML = acctVac;
+                    document.getElementById("acctTotal").innerHTML = (data + acctVac);
+                    GetItNumbers();
+                });
+            }
+            function GetFinanceNumbers() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 1,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("financeEmps").innerHTML = data;
+                    document.getElementById("financeVac").innerHTML = financeVac;
+                    document.getElementById("financeTotal").innerHTML = (data + financeVac);
+                    GetAcctNumbers();
+                });
+            }
+            function CountVacantIppr() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/4",
+                    dataType: "json"
+                }).done(function (data) {
+                    ipprVac = data;
+                    GetFinanceNumbers();
+                });
+            }
+            function CountVacantIt() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/3",
+                    dataType: "json"
+                }).done(function (data) {
+                    itVac = data;
+                    CountVacantIppr();
+                });
+            }
+            function CountVacantAcct() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/2",
+                    dataType: "json"
+                }).done(function (data) {
+                    acctVac = data;
+                    CountVacantIt();
+                });
+            }
+            function CountVacantFinance() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/1",
+                    dataType: "json"
+                }).done(function (data) {
+                    financeVac = data;
+                    CountVacantAcct();
+                });
+            }
+            CountVacantFinance();
+
+            $("#finance").on("click", function () {
+                window.localStorage.setItem("theDeptId", 1);
+            });
+            $("#acctOps").on("click", function () {
+                window.localStorage.setItem("theDeptId", 2);
+            });
+            $("#itDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 3);
+            });
+            $("#ippr").on("click", function () {
+                window.localStorage.setItem("theDeptId", 4);
+            });
+        });
+    </script>
+}
+

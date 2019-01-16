@@ -1,0 +1,281 @@
+﻿@model HrDashboard.Models.AlphaList
+@{
+    ViewBag.Title = "ATDetails";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        <div id="buttons" class="form-group">
+            <button type="button" data-aTeam-id="@Model.Id" class="btn btn-danger js-delete" style="display:inline-block; float:right" theBtnLink="@Url.Action("Index", "AlphaList")">
+                <span class="glyphicon glyphicon-remove"></span> Resign
+            </button>
+            <button id="editBtn" type="button" class="btn btn-warning" style="display:inline-block;float:right" onclick="location.href='@Url.Action("NewAlpha", "AlphaList")'">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+            </button><br />
+        </div>
+    }
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h1 class="text-primary">@Model.FirstName @Model.MiddleName @Model.LastName</h1>
+                </div>
+                <div class="box-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#pInfo">Personal Info</a></li>
+                        <li><a data-toggle="tab" href="#status">Status</a></li>
+                        <li><a data-toggle="tab" href="#afla">AFLA</a></li>
+                        <li><a data-toggle="tab" href="#logs">Logs</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="pInfo" class="tab-pane fade in active">
+                            <table class="table table-striped table-hover aTeam">
+                                <caption class="text-primary"><h2>Personal Info</h2></caption>
+                                <thead>
+                                    <tr class="success">
+                                        <th><strong>Details</strong></th>
+                                        <th><strong>Data</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Date of Birth: </th>
+                                        <td>@Model.DateOfBirth</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Sex: </th>
+                                        <td>@Model.Sex</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Civil Status: </th>
+                                        <td>@Model.CivilStatus</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number: </th>
+                                        <td>@Model.ContactNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address: </th>
+                                        <td>@Model.PermanentAddress</td>
+                                    </tr>
+                                    <tr>
+                                        <th>SSS Number: </th>
+                                        <td>@Model.SSSNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>PhilHealth ID: </th>
+                                        <td>@Model.PhilHealthNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>HDMF Number: </th>
+                                        <td>@Model.HDMFNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pagibig ID Number: </th>
+                                        <td>@Model.PagibigNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>TIN Number: </th>
+                                        <td>@Model.TINNo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="status" class="tab-pane fade">
+                            <table class="table table-striped table-hover aTeam">
+                                <caption class="text-primary"><h2>Status</h2></caption>
+                                <thead>
+                                    <tr class="info">
+                                        <th><strong>Details</strong></th>
+                                        <th><strong>Data</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Date of Hire: </th>
+                                        <td>@Model.DateOfHire</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position: </th>
+                                        <td>@Model.PresentPosition</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descrpition: </th>
+                                        <td>@Model.Description</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Job Grade: </th>
+                                        <td>@Model.JobGrade</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Allowances: </th>
+                                        <td>@Model.Allowances</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Basic Salary: </th>
+                                        <td>@Model.BasicSalary</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Vacation Leave Credits: </th>
+                                        <td>@Model.VLCredits</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Area of Assignment: </th>
+                                        <td>@Model.AreaOfAssignment</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employment Status: </th>
+                                        <td>@Model.EmploymentStatus</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date of Regularization: </th>
+                                        <td>@Model.DateOfRegularization</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Temporary ID: </th>
+                                        <td>@Model.TemporaryId</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Permanent ID: </th>
+                                        <td>@Model.PermanentId</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="afla" class="tab-pane fade">
+                            <h3>AFLA</h3>
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                        </div>
+                        <div id="logs" class="tab-pane fade">
+                            <table id="LogTable" class="table table-bordered table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Log ID</th>
+                                        <th>Log Date</th>
+                                        <th>Log Type</th>
+                                        <th>Employee ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#editBtn").on("click", function () {
+                window.localStorage.setItem("editBool", 1);
+                window.localStorage.setItem("alphaId", button.attr("data-aTeam-id"));
+            });
+
+            var button = $("#buttons .js-delete");
+            var table = $("#LogTable").DataTable({
+                ajax: {
+                    url: "/api/logbook/" + button.attr("data-aTeam-id"),
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "logId" },
+                    {
+                        data: "logId",
+                        render: function (data, type, logbook) {
+                            var date = logbook.logDate;
+                            var format = "MM/DD/YYYY";
+                            return moment(date).format(format);
+                        }
+                    },
+                    { data: "logType" },
+                    { data: "id" }
+                ]
+            });
+            function ArchiveAlphaList() {
+                $.ajax({
+                    url: "/api/alphalist/archive/" + button.attr("data-aTeam-id"),
+                    method: "PUT",
+                    data: { "active": false },
+                    success: function () {
+                        window.localStorage.setItem("successBool", 1);
+                        window.location = button.attr("theBtnLink");
+                    }
+                }).fail(function () {
+                    console.log(button.attr("data-aTeam-id"));
+                });
+            }
+            function DeletePlantilla() {
+                $.ajax({
+                    url: "/api/plantilla/" + button.attr("data-aTeam-id"),
+                    method: "DELETE"
+                }).done(function () {
+                    ArchiveAlphaList();
+                });
+            }
+            function ChangePositionStat(posId) {
+                var newStat = { "posStatus": "Vacant" };
+                $.ajax({
+                    url: "/api/position/" + posId,
+                    type: "put",
+                    data: newStat
+                }).done(function () {
+                    DeletePlantilla();
+                }).fail(function () {
+                    toastr["error"]("Position Not Updated Due to Error.", "Change Error!");
+                });
+            }
+            function QueryPositionId(id) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/alphalist/" + id,
+                    dataType: "json"
+                }).done(function (data) {
+                    ChangePositionStat(data.posId);
+                });
+            }
+            function NewLog(empId) {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                today = mm + '/' + dd + '/' + yyyy;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/logbook/new",
+                    data: {
+                        "logDate": today,
+                        "logType": "Date Retired",
+                        "id": empId
+                    }
+                }).done(function () {
+                    QueryPositionId(button.attr("data-aTeam-id"));
+                }).fail(function () {
+                    toastr["error"]("Log Not Updated Due to Error.", "Oops!");
+                });
+            }
+            $("#buttons").on("click", ".js-delete", function () {
+                button = $(this);
+                bootbox.confirm("Are you sure you want to delete?", function (result) {
+                    if (result) {
+                        NewLog(button.attr("data-aTeam-id"));
+                    }
+                });
+            });
+        });
+    </script>
+}

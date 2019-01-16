@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "LogIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h2><b>Logistics Division</b></h2>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h4>Transport</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="transpoEmps"></td>
+                            <td id="transpoVac"></td>
+                            <td id="transpoTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-car"></i>
+                </div>
+                <a id="transport" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>Warehouse</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="warehouseEmps"></td>
+                            <td id="warehouseVac"></td>
+                            <td id="warehouseTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dropbox"></i>
+                </div>
+                <a id="warehouse" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var warehouseVac = "";
+            var transportVac = "";
+            function CountWarehouse() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 10,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("warehouseEmps").innerHTML = data;
+                    document.getElementById("warehouseVac").innerHTML = warehouseVac;
+                    document.getElementById("warehouseTotal").innerHTML = (data + warehouseVac);
+                });
+            }
+            function CountTrasport() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 9,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("transpoEmps").innerHTML = data;
+                    document.getElementById("transpoVac").innerHTML = transportVac;
+                    document.getElementById("transpoTotal").innerHTML = (data + transportVac);
+                    CountWarehouse();
+                });
+            }
+            function CountVacTranspo() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/10",
+                    dataType: "json"
+                }).done(function (data) {
+                    transportVac = data;
+                    CountTrasport();
+                });
+            }
+            function CountVacWarehouse() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/9",
+                    dataType: "json"
+                }).done(function (data) {
+                    warehouseVac = data;
+                    CountVacTranspo();
+                });
+            }
+            CountVacWarehouse();
+            $("#transport").on("click", function () {
+                window.localStorage.setItem("theDeptId", 9);
+            });
+            $("#warehouse").on("click", function () {
+                window.localStorage.setItem("theDeptId", 10);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "NewBeta";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">New Recruit</h3>
+                </div>
+
+                <div class="box-body">
+                    <form id="newForm" role="form">
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input id="fName" name="fName" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Middle Name:</label>
+                            <input id="mName" name="mName" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input id="lName" name="lName" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input id="email" name="email" type="email" value="" class="form-control input-sm" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contact Number:</label>
+                            <input id="contactNumber" name="contactNumber" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date of Application</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id="dateApplied" name="dateApplied" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Area of Designation</label>
+                            <input id="areaOfDesignation" name="areaOfDesignation" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Position Applied</label>
+                            <input id="positionApplied" name="positionApplied" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Source of Application</label>
+                            <input id="sourceOfApplication" name="sourceOfApplication" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Business Unit</label>
+                            <input id="businessUnit" name="businessUnit" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Work Experience</label>
+                            <input id="workExp" name="workExp" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Education:</label>
+                            <input id="educationalBg" name="educationalBg" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>School:</label>
+                            <input id="school" name="school" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Remarks:</label>
+                            <input id="remarks" name="remarks" type="text" value="" class="form-control input-sm" />
+                        </div>
+
+                        <input type="text" id="initialStatus" name="initialStatus" value="Pending" style="display: none" />
+                        <input type="text" id="hrScreening" name="hrScreening" value="Pending" style="display: none" />
+                        <input type="text" id="deptAssessment" name="deptAssessment" value="Pending" style="display: none" />
+                        <input type="text" id="examination" name="examination" value="Pending" style="display: none" />
+
+                        <button class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('[data-mask]').inputmask()
+
+            $('#newForm').submit(function (e) {
+
+                var fName = $('#fName').val();
+                var mName = $('#mName').val();
+                var lName = $('#lName').val();
+                var email = $('#email').val();
+                var contactNumber = $('#contactNumber').val();
+                var dateOfBirth = $('#dateOfBirth').val();
+                var dateApplied = $('#dateApplied').val();
+                var areaOfDesignation = $('#areaOfDesignation').val();
+                var positionApplied = $('#positionApplied').val();
+                var sourceOfApplication = $('#sourceOfApplication').val();
+                var businessUnit = $('#businessUnit').val();
+                var workExp = $('#workExp').val();
+                var educationalBg = $('#educationalBg').val();
+                var school = $('#school').val();
+                var remarks = $('#remarks').val();
+                var initialStatus = $('#initialStatus').val();
+                var hrScreening = $('#hrScreening').val();
+                var deptAssessment = $('#deptAssessment').val();
+                var examination = $('#examination').val();
+
+                var vm = {
+                    'fName': fName,
+                    'mName': mName,
+                    'lName': lName,
+                    'email': email,
+                    'contactNumber': contactNumber,
+                    'dateOfBirth': dateOfBirth,
+                    'dateApplied': dateApplied,
+                    'areaOfDesignation': areaOfDesignation,
+                    'positionApplied': positionApplied,
+                    'sourceOfApplication': sourceOfApplication,
+                    'businessUnit': businessUnit,
+                    'workExp': workExp,
+                    'educationalBg': educationalBg,
+                    'school': school,
+                    'remarks': remarks,
+                    'initialStatus': initialStatus,
+                    'hrScreening': hrScreening,
+                    'deptAssessment': deptAssessment,
+                    'examination': examination
+                };
+
+                $.ajax({
+                    url: "/api/betalist",
+                    method: "post",
+                    data: vm
+                })
+                    .done(function () {
+                        toastr["success"]("Recruit is Successfully Recorded.", "Nice!");
+                        fName.val("");
+                        mName.val("");
+                        lName.val("");
+                        email.val("");
+                        contactNumber.val("");
+                        dateOfBirth.val("");
+                        dateApplied.val("");
+                        areaOfDesignation.val("");
+                        positionApplied.val("");
+                        sourceOfApplication.val("");
+                        businessUnit.val("");
+                        workExp.val("");
+                        educationalBg.val("");
+                        school.val("");
+                        remarks.val("");
+
+                        vm = {};
+                    })
+                    .fail(function () {
+                        toastr["error"]("Something Unexpected Happened, Contact IT for more info.", "Oh No!");
+                    });
+
+                return false;
+            });
+        });
+    </script>
+}

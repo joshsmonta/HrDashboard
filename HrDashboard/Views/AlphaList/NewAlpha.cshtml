@@ -1,0 +1,515 @@
+﻿@model HrDashboard.Models.AlphaList
+@{
+    ViewBag.Title = "NewAlpha";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header"></section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Employee Info</h3>
+                </div>
+                <div class="box-body">
+                    <form id="newForm" role="form">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input id="firstName" name="firstName" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Middle Name:</label>
+                                <input id="middleName" name="middleName" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input id="lastName" name="lastName" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date of Birth:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sex:</label>
+                                <select id="sex" name="sex" class="form-control" style="width: 100%;">
+                                    <option selected="selected">Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Civil Status:</label>
+                                <select id="civilStatus" name="civilStatus" class="form-control" style="width: 100%;">
+                                    <option selected="selected">Single</option>
+                                    <option>Married</option>
+                                    <option>Separated</option>
+                                    <option>Widowed</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>SSS No:</label>
+                                <input id="sssNo" name="sssNo" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phil Health ID:</label>
+                                <input id="philHealthNo" name="philHealthNo" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>HDMF No:</label>
+                                <input id="hdmfNo" name="hdmfNo" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pagibig No:</label>
+                                <input id="pagibigNo" name="pagibigNo" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>TIN:</label>
+                                <input id="tinNo" name="tinNo" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contact No:</label>
+                                <input id="contactNumber" name="contactNumber" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <textarea id="permanentAddress" name="permanentAddress" class="form-control" rows="3" placeholder="Enter Here..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Date of Hire:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input id="dateOfHire" name="dateOfHire" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Present Position:</label>
+                                <div id="custom-templates" class="tt-container">
+                                    <input id="presentPosition" name="presentPosition" type="text" value="" class="typeahead form-control input-sm" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description:</label>
+                                <input id="description" name="description" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Job Grade:</label>
+                                <input id="jobGrade" name="jobGrade" type="number" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Basic Salary:</label>
+                                <input id="basicSalary" name="basicSalary" type="number" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Allowances:</label>
+                                <input id="allowances" name="allowances" type="number" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>VL Credits:</label>
+                                <input id="vlCredits" name="vlCredits" type="number" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>SL Credits:</label>
+                                <input id="slCredits" name="slCredits" type="number" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Area of Assignment :</label>
+                                <input id="areaOfAssignment" name="areaOfAssignment" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Employment Status:</label>
+                                <select id="employmentStatus" name="employmentStatus" class="form-control" style="width: 100%;">
+                                    <option selected="selected">Regular</option>
+                                    <option>Probationary</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date of Regularization:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input id="dateOfRegularization" name="dateOfRegularization" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Temporary ID:</label>
+                                <input id="temporaryId" name="temporaryId" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Permanent ID:</label>
+                                <input id="permanentId" name="permanentId" type="text" value="" class="form-control input-sm" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Upload Profile Picture:</label>
+                                <input id="image-file" type="file" />
+                            </div>
+                        </div><br />
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-flat">submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+        $('[data-mask]').inputmask();
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            var editBool = localStorage.getItem("editBool");
+            //EDIT EXISTING PROFILE
+            if (editBool == 1) {
+                var aTeam = localStorage.getItem("alphaId");
+                var positionId = "";
+                var empId = "";
+                document.getElementById("presentPosition").disabled = true;
+                $.ajax({
+                    type: "GET",
+                    url: "/api/alphalist/" + aTeam,
+                    dataType: "json"
+                }).done(function (data) {
+                    $('#firstName').val(data.firstName);
+                    $('#middleName').val(data.middleName);
+                    $('#lastName').val(data.lastName);
+                    $('#dateOfBirth').val(data.dateOfBirth);
+                    $('#sex').val(data.sex);
+                    $('#civilStatus').val(data.civilStatus);
+                    $('#sssNo').val(data.sssNo);
+                    $('#philHealthNo').val(data.philHealthNo);
+                    $('#hdmfNo').val(data.hdmfNo);
+                    $('#pagibigNo').val(data.pagibigNo);
+                    $('#tinNo').val(data.tinNo);
+                    $('#contactNumber').val(data.contactNumber);
+                    $('#permanentAddress').val(data.permanentAddress);
+                    $('#dateOfHire').val(data.dateOfHire);
+                    $('#description').val(data.description);
+                    $('#jobGrade').val(data.jobGrade);
+                    $('#basicSalary').val(data.basicSalary);
+                    $('#allowances').val(data.allowances);
+                    $('#vlCredits').val(data.vlCredits);
+                    $('#slCredits').val(data.slCredits);
+                    $('#areaOfAssignment').val(data.areaOfAssignment);
+                    $('#employmentStatus').val(data.employmentStatus);
+                    $('#dateOfRegularization').val(data.dateOfRegularization);
+                    $('#temporaryId').val(data.temporaryId);
+                    $('#permanentId').val(data.permanentId);
+                    $('#presentPosition').val(data.presentPosition);
+                    positionId = data.posId;
+                    empId = data.id;
+                });
+
+                $('#newForm').submit(function (e) {
+                    bootbox.confirm("Are you sure you want to save this info?", function (result) {
+                        if (result) {
+                            var firstName = $('#firstName').val();
+                            var middleName = $('#middleName').val();
+                            var lastName = $('#lastName').val();
+                            var dateOfBirth = $('#dateOfBirth').val();
+                            var sex = $('#sex').find(":selected").text();
+                            var civilStatus = $('#civilStatus').find(":selected").text();
+                            var sssNo = $('#sssNo').val();
+                            var philHealthNo = $('#philHealthNo').val();
+                            var hdmfNo = $('#hdmfNo').val();
+                            var pagibigNo = $('#pagibigNo').val();
+                            var tinNo = $('#tinNo').val();
+                            var contactNo = $('#contactNumber').val();
+                            var permanentAddress = $('#permanentAddress').val();
+                            var positionName = $('#presentPosition').val();
+                            var dateOfHire = $('#dateOfHire').val();
+                            var description = $('#description').val();
+                            var jobGrade = $('#jobGrade').val();
+                            var basicSalary = $('#basicSalary').val();
+                            var allowances = $('#allowances').val();
+                            var vlCredits = $('#vlCredits').val();
+                            var slCredits = $('#slCredits').val();
+                            var areaOfAssignment = $('#areaOfAssignment').val();
+                            var employmentStatus = $('#employmentStatus').find(":selected").text();
+                            var dateOfRegularization = $('#dateOfRegularization').val();
+                            var temporaryId = $('#temporaryId').val();
+                            var permanentId = $('#permanentId').val();
+                            var vm = {
+                                "id": empId,
+                                "firstName": firstName,
+                                "middleName": middleName,
+                                "lastName": lastName,
+                                "dateOfBirth": dateOfBirth,
+                                "sex": sex,
+                                "civilStatus": civilStatus,
+                                "sssNo": sssNo,
+                                "philHealthNo": philHealthNo,
+                                "hdmfNo": hdmfNo,
+                                "pagibigNo": pagibigNo,
+                                "tinNo": tinNo,
+                                "contactNumber": contactNo,
+                                "permanentAddress": permanentAddress,
+                                "dateOfHire": dateOfHire,
+                                "presentPosition": positionName,
+                                "description": description,
+                                "jobGrade": jobGrade,
+                                "basicSalary": basicSalary,
+                                "allowances": allowances,
+                                "vlCredits": vlCredits,
+                                "slCredits": slCredits,
+                                "areaOfAssignment": areaOfAssignment,
+                                "employmentStatus": employmentStatus,
+                                "dateOfRegularization": dateOfRegularization,
+                                "temporaryId": temporaryId,
+                                "permanentId": permanentId,
+                                "posId": positionId,
+                                "active": true
+                            };
+                            $.ajax({
+                                url: "/api/alphalist/edit/" + aTeam,
+                                type: "PUT",
+                                data: vm
+                            }).done(function () {
+                                vm = {};
+                                window.localStorage.setItem("editBool", 0);
+                                toastr["success"]("Record has been saved to database.", "Success");
+                            }).fail(function () {
+                                toastr["error"]("Something Unexpected Happened, Contact IT for more info.", "Oh No!");
+                                console.log(civilStatus + " " + positionName);
+                            });
+                        }
+                    });
+                    return false;
+                });
+            }
+            //NEW PROFILE
+            else if (editBool == 0) {
+                var positionId = "";
+                var positionName = "";
+                var employeeId = "";
+                // Search Available Positions using typeahead
+                var positions = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('posName'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/api/position?query=%QUERY',
+                        wildcard: '%QUERY',
+                        filter: function (positions) {
+                            return $.map(positions, function (position) {
+                                return {
+                                    posId: position.posId,
+                                    posName: position.posName
+                                };
+                            });
+                        }
+                    }
+                });
+
+                $("#presentPosition").typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                }, {
+                        name: 'positions',
+                        display: 'posName',
+                        limit: 10,
+                        source: positions,
+                        templates: {
+                            suggestion: function (data) {
+                                return '<p><strong>' + data.posName + '</strong> – ' + data.posId + '</p>';
+                            }
+                        }
+                    }).on("typeahead:select", function (e, position) {
+                        positionId = position.posId;
+                        positionName = position.posName;
+                    });
+
+                function ChangePositionStat(posId) {
+                    var newStat = { "posStatus": "Active" };
+                    $.ajax({
+                        url: "/api/position/" + posId,
+                        type: "put",
+                        data: newStat
+                    }).done(function () {
+                        toastr["success"]("New Alphalist Member has been Successfully Recorded.", "Okay!");
+                        $('#firstName').val("");
+                        $('#middleName').val("");
+                        $('#lastName').val("");
+                        $('#dateOfBirth').val("");
+                        $('#sex').val("");
+                        $('#civilStatus').val("")
+                        $('#sssNo').val("");
+                        $('#philHealthNo').val("");
+                        $('#hdmfNo').val("");
+                        $('#pagibigNo').val("");
+                        $('#tinNo').val("");
+                        $('#contactNumber').val("");
+                        $('#permanentAddress').val("");
+                        $('#dateOfHire').val("");
+                        $('#description').val("");
+                        $('#jobGrade').val("");
+                        $('#basicSalary').val("");
+                        $('#allowances').val("");
+                        $('#vlCredits').val("");
+                        $('#slCredits').val("");
+                        $('#areaOfAssignment').val("");
+                        $('#employmentStatus').val("");
+                        $('#dateOfRegularization').val("");
+                        $('#temporaryId').val("");
+                        $('#permanentId').val("");
+                        $('#presentPosition').val("");
+                        positionId = "";
+                        employeeId = "";
+                    }).fail(function () {
+                        toastr["error"]("Position Not Updated Due to Error.", "Change Error!");
+                    });
+                }
+                function PlantillaPush(empId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/plantilla/update",
+                        data: {
+                            "positionId": positionId,
+                            "employeeId": empId
+                        }
+                    }).done(function () {
+                        ChangePositionStat(positionId);
+                    }).fail(function () {
+                        toastr["error"]("Plantilla Not Updated Due to Error.", "Oops!");
+                    });
+                }
+                function NewLog(empId) {
+                    var dateOfHire = $('#dateOfHire').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/logbook/new",
+                        data: {
+                            "logDate": dateOfHire,
+                            "logType": "Date Hired",
+                            "id": empId
+                        }
+                    }).done(function () {
+                        PlantillaPush(empId);
+                    }).fail(function () {
+                        toastr["error"]("Log Not Updated Due to Error.", "Oops!");
+                    });
+                }
+                function GetId(posiID) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/alphalist/byid/" + posiID,
+                        dataType: "json"
+                    }).done(function (data) {
+                        employeeId = data.id;
+                        NewLog(employeeId);
+                    });
+                }
+                $('#newForm').submit(function (e) {
+                    var firstName = $('#firstName').val();
+                    var middleName = $('#middleName').val();
+                    var lastName = $('#lastName').val();
+                    var dateOfBirth = $('#dateOfBirth').val();
+                    var sex = $('#sex').find(":selected").text();
+                    var civilStatus = $('#civilStatus').find(":selected").text();
+                    var sssNo = $('#sssNo').val();
+                    var philHealthNo = $('#philHealthNo').val();
+                    var hdmfNo = $('#hdmfNo').val();
+                    var pagibigNo = $('#pagibigNo').val();
+                    var tinNo = $('#tinNo').val();
+                    var contactNo = $('#contactNumber').val();
+                    var permanentAddress = $('#permanentAddress').val();
+                    var dateOfHire = $('#dateOfHire').val();
+                    var description = $('#description').val();
+                    var jobGrade = $('#jobGrade').val();
+                    var basicSalary = $('#basicSalary').val();
+                    var allowances = $('#allowances').val();
+                    var vlCredits = $('#vlCredits').val();
+                    var slCredits = $('#slCredits').val();
+                    var areaOfAssignment = $('#areaOfAssignment').val();
+                    var employmentStatus = $('#employmentStatus').find(":selected").text();
+                    var dateOfRegularization = $('#dateOfRegularization').val();
+                    var temporaryId = $('#temporaryId').val();
+                    var permanentId = $('#permanentId').val();
+                    var vm = {
+                        "firstName": firstName,
+                        "middleName": middleName,
+                        "lastName": lastName,
+                        "dateOfBirth": dateOfBirth,
+                        "sex": sex,
+                        "civilStatus": civilStatus,
+                        "sssNo": sssNo,
+                        "philHealthNo": philHealthNo,
+                        "hdmfNo": hdmfNo,
+                        "pagibigNo": pagibigNo,
+                        "tinNo": tinNo,
+                        "contactNumber": contactNo,
+                        "permanentAddress": permanentAddress,
+                        "dateOfHire": dateOfHire,
+                        "presentPosition": positionName,
+                        "description": description,
+                        "jobGrade": jobGrade,
+                        "basicSalary": basicSalary,
+                        "allowances": allowances,
+                        "vlCredits": vlCredits,
+                        "slCredits": slCredits,
+                        "areaOfAssignment": areaOfAssignment,
+                        "employmentStatus": employmentStatus,
+                        "dateOfRegularization": dateOfRegularization,
+                        "temporaryId": temporaryId,
+                        "permanentId": permanentId,
+                        "posId": positionId,
+                        "active": true
+                    };
+                    $.ajax({
+                        url: "/api/alphalist",
+                        type: "post",
+                        data: vm
+                    }).done(function () {
+                        GetId(positionId);
+                        vm = {};
+                    }).fail(function () {
+                        toastr["error"]("Something Unexpected Happened, Contact IT for more info.", "Oh No!");
+                    });
+                    return false;
+                });
+            }
+        });
+    </script>
+}

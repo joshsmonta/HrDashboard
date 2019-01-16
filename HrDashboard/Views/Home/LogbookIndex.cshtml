@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "LogbookIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header"></section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h2 class="box-title">LogBook</h2>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Log Date</th>
+                                <th>Log Type</th>
+                                <th>Employee ID</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = $("#Table").DataTable({
+                ajax: {
+                    url: "/api/logbook",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "logId" },
+                    { 
+                        data: "logId",
+                        render: function (data, type, logbook) {
+                            var date = logbook.logDate;
+                            var format = "MM/DD/YYYY";
+                            return moment(date).format(format);
+                        }
+                    },
+                    { data: "logType" },
+                    { data: "id" }
+                ]
+            });
+        });
+    </script>
+}

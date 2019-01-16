@@ -1,0 +1,86 @@
+﻿@model IEnumerable<HrDashboard.Models.AlphaList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <div class="form-group">
+        <button id="newBtn" type="button" class="btn btn-success" style=" display:inline-block; float:right" onclick="location.href='@Url.Action("NewAlpha","AlphaList")'">
+            <span class="glyphicon glyphicon-plus"></span> Encode
+        </button>
+    </div><br />
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h2 class="box-title">Alpha List</h2>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Position</th>
+                                <th>Date Hired</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        $("#newBtn").on("click", function () {
+            window.localStorage.setItem("editBool", 0);
+        })
+
+        var successBool = localStorage.getItem("successBool");
+        if(successBool == 1){
+            toastr["warning"]("Record has now been removed. Transfered to Archives.", "Important!");
+            toastr["success"]("New Vacant Position has been opened.", "Notice!");
+            window.localStorage.setItem("successBool", 0);
+        }
+        
+        var table = $("#Table").DataTable({
+            ajax: {
+                url: "/api/alphalist",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "id"
+                },
+                {
+                    data: "id",
+                    render: function(data, type, alphalist) {
+                        return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
+                    }
+                },
+                {
+                    data: "presentPosition"
+                },
+                {
+                    data: "id",
+                    render: function (data, type, alphalist) {
+                        var date = alphalist.dateOfHire;
+                        var format = "MM/DD/YYYY";
+                        return moment(date).format(format);
+                    }
+                }
+            ]
+        });
+    });
+</script>
+}

@@ -1,0 +1,508 @@
+﻿
+@{
+    ViewBag.Title = "BusinessUnitIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h3 id="allEmps">Business Units</h3>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Sonic One</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps1"></td>
+                            <td id="Vac1"></td>
+                            <td id="Total1"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-anchor"></i>
+                </div>
+                <a id="sonicOneLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Sonic Two</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps2"></td>
+                            <td id="Vac2"></td>
+                            <td id="Total2"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tripadvisor"></i>
+                </div>
+                <a id="sonicTwoLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Sonic Three</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps3"></td>
+                            <td id="Vac3"></td>
+                            <td id="Total3"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-truck"></i>
+                </div>
+                <a id="sonicThreeLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>UFS</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps4"></td>
+                            <td id="Vac4"></td>
+                            <td id="Total4"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="ufsLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Selecta</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps5"></td>
+                            <td id="Vac5"></td>
+                            <td id="Total5"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="selectaLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Goodyear</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps6"></td>
+                            <td id="Vac6"></td>
+                            <td id="Total6"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="goodyearLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Komeya</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps7"></td>
+                            <td id="Vac7"></td>
+                            <td id="Total7"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="komeyaLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Canaan</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps8"></td>
+                            <td id="Vac8"></td>
+                            <td id="Total8"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="canaanLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h4>Shared</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="Emps9"></td>
+                            <td id="Vac9"></td>
+                            <td id="Total9"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="sharedLink" href="@Url.Action("DivisionByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        var sonic1Var = "";
+        var sonic2Var = "";
+        var sonic3Var = "";
+        var ufsVar = "";
+        var selectaVar = "";
+        var goodyearVar = "";
+        var komeyaVar = "";
+        var canaanVar = "";
+        var sharedVar = "";
+        function GetSonicOne () {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 1,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps1").innerHTML = data;
+                document.getElementById("Vac1").innerHTML = sonic1Var;
+                document.getElementById("Total1").innerHTML = (data +  sonic1Var);
+            });
+        }
+        function GetSonicTwo() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 2,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps2").innerHTML = data;
+                document.getElementById("Vac2").innerHTML = sonic2Var;
+                document.getElementById("Total2").innerHTML = (data + sonic2Var);
+                GetSonicOne();
+            });
+        }
+        function GetSonicThree() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 3,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps3").innerHTML = data;
+                document.getElementById("Vac3").innerHTML = sonic3Var;
+                document.getElementById("Total3").innerHTML = (data + sonic3Var);
+                GetSonicTwo();
+            });
+        }
+        function GetUFS() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 4,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps4").innerHTML = data;
+                document.getElementById("Vac4").innerHTML = ufsVar;
+                document.getElementById("Total4").innerHTML = (data + ufsVar);
+                GetSonicThree();
+            });
+        }
+        function GetSelecta() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 5,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps5").innerHTML = data;
+                document.getElementById("Vac5").innerHTML = selectaVar;
+                document.getElementById("Total5").innerHTML = (data + selectaVar);
+                GetUFS();
+            });
+        }
+        function GetGoodyear() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 6,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps6").innerHTML = data;
+                document.getElementById("Vac6").innerHTML = goodyearVar;
+                document.getElementById("Total6").innerHTML = (data + goodyearVar);
+                GetSelecta();
+            });
+        }
+        function GetKomeya() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 7,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps7").innerHTML = data;
+                document.getElementById("Vac7").innerHTML = komeyaVar;
+                document.getElementById("Total7").innerHTML = (data + komeyaVar);
+                GetGoodyear();
+            });
+        }
+        function GetCanaan() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 8,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps8").innerHTML = data;
+                document.getElementById("Vac8").innerHTML = canaanVar;
+                document.getElementById("Total8").innerHTML = (data + canaanVar);
+                GetKomeya();
+            });
+        }
+        function GetShared() {
+            $.ajax({
+                type: "GET",
+                url: "/api/plantilla/unit/count/" + 9,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("Emps9").innerHTML = data;
+                document.getElementById("Vac9").innerHTML = sharedVar;
+                document.getElementById("Total9").innerHTML = (data + sharedVar);
+                GetCanaan();
+            });
+        }
+        function GetVacantSonicOne() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 1,
+                dataType: "json"
+            }).done(function (data) {
+                sonic1Var = data;
+                GetShared();
+            });
+        }
+        function GetVacantSonicTwo() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 2,
+                dataType: "json"
+            }).done(function (data) {
+                sonic2Var = data;
+                GetVacantSonicOne();
+            });
+        }
+        function GetVacantSonicThree() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 3,
+                dataType: "json"
+            }).done(function (data) {
+                sonic3Var = data;
+                GetVacantSonicTwo()
+            });
+        }
+        function GetVacantUFS() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 4,
+                dataType: "json"
+            }).done(function (data) {
+                ufsVar = data;
+                GetVacantSonicThree();
+            });
+        }
+        function GetVacantSelecta() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 5,
+                dataType: "json"
+            }).done(function (data) {
+                selectaVar = data;
+                GetVacantUFS();
+            });
+        }
+        function GetVacantGoodyear() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 6,
+                dataType: "json"
+            }).done(function (data) {
+                goodyearVar = data;
+                GetVacantSelecta();
+            });
+        }
+        function GetVacantKomeya() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 7,
+                dataType: "json"
+            }).done(function (data) {
+                komeyaVar = data;
+                GetVacantGoodyear();
+            });
+        }
+        function GetVacantCanaan() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 8,
+                dataType: "json"
+            }).done(function (data) {
+                canaanVar = data;
+                GetVacantKomeya();
+            });
+        }
+        function GetVacantShared() {
+            $.ajax({
+                type: "GET",
+                url: "/api/position/unit/vacant/" + 9,
+                dataType: "json"
+            }).done(function (data) {
+                sharedVar = data;
+                GetVacantCanaan();
+            });
+        }
+        GetVacantShared();
+
+        $("#sonicOneLink").on("click", function () {
+            window.localStorage.setItem("unitId", 1);
+            window.localStorage.setItem("unitName", "SonicOne");
+        });
+        $("#sonicTwoLink").on("click", function () {
+            window.localStorage.setItem("unitId", 2);
+            window.localStorage.setItem("unitName", "SonicTwo");
+        });
+        $("#sonicThreeLink").on("click", function () {
+            window.localStorage.setItem("unitId", 3);
+            window.localStorage.setItem("unitName", "SonicThree");
+        });
+        $("#ufsLink").on("click", function () {
+            window.localStorage.setItem("unitId", 4);
+            window.localStorage.setItem("unitName", "UFS");
+        });
+        $("#selectaLink").on("click", function () {
+            window.localStorage.setItem("unitId", 5);
+            window.localStorage.setItem("unitName", "Selecta");
+        });
+        $("#goodyearLink").on("click", function () {
+            window.localStorage.setItem("unitId", 6);
+            window.localStorage.setItem("unitName", "GoodYear");
+        });
+        $("#komeyaLink").on("click", function () {
+            window.localStorage.setItem("unitId", 7);
+            window.localStorage.setItem("unitName", "Komeya");
+        });
+        $("#canaanLink").on("click", function () {
+            window.localStorage.setItem("unitId", 8);
+            window.localStorage.setItem("unitName", "Canaan");
+        });
+        $("#sharedLink").on("click", function () {
+            window.localStorage.setItem("unitId", 9);
+            window.localStorage.setItem("unitName", "Shared");
+        });
+    });
+</script>
+}

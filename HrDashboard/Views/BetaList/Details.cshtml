@@ -1,0 +1,317 @@
+﻿@model HrDashboard.Models.BetaList
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <div id="buttons" class="form-group">
+        @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+        {
+            <button type="button" data-bTeam-id="@Model.Id" class="btn btn-danger js-delete" style="display:inline-block; float:right">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </button><br />
+        }
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h1 class="text-primary">@Model.FName @Model.MName @Model.LName</h1>
+                </div>
+                
+                <div class="box-body">
+                    <table id="table" class="table table-striped table-hover" style="width:100%">
+                        <caption class="text-primary"><h2>Recruit Info</h2></caption>
+                        <thead>
+                            <tr class="info">
+                                <th>Details</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>@Model.FName @Model.MName @Model.LName</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td>@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td>@Model.ContactNumber</td>
+                            </tr>
+                            <tr>
+                                <th>Date of Birth</th>
+                                <td>@Model.DateOfBirth</td>
+                            </tr>
+                            <tr>
+                                <th>Position Applied for</th>
+                                <td>@Model.PositionApplied</td>
+                            </tr>
+                            <tr>
+                                <th>Date Applied</th>
+                                <td>@Model.DateApplied</td>
+                            </tr>
+                            <tr>
+                                <th>Area of Designation</th>
+                                <td>@Model.AreaOfDesignation</td>
+                            </tr>
+                            <tr>
+                                <th>Source of Application</th>
+                                <td>@Model.SourceOfApplication</td>
+                            </tr>
+                            <tr>
+                                <th>Business Unit</th>
+                                <td>@Model.BusinessUnit</td>
+                            </tr>
+                            <tr>
+                                <th>Work Experience</th>
+                                <td>@Model.WorkExp</td>
+                            </tr>
+                            <tr>
+                                <th>Educational Background</th>
+                                <td>@Model.EducationalBg</td>
+                            </tr>
+                            <tr>
+                                <th>School</th>
+                                <td>@Model.School</td>
+                            </tr>
+                            <tr>
+                                <th>Remarks</th>
+                                <td>@Model.Remarks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-hover" style="width:50%">
+                        <caption class="text-primary"><h2>Status</h2></caption>
+                        <thead>
+                            <tr class="info">
+                                <th>Details</th>
+                                <th class="text-center">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <!--Initial Status-->
+                            @if (Model.InitialStatus == "Cleared")
+                            {
+                                <tr>
+                                    <th>Initial Status:</th>
+                                    <td class="success">@Model.InitialStatus</td>
+                                </tr>
+                            }
+                            @if (Model.InitialStatus == "Pending")
+                            {
+                                <tr>
+                                    <th>Initial Status:</th>
+                                    <td class="warning">@Model.InitialStatus</td>
+                                </tr>
+                            }
+                            @if (Model.InitialStatus == "Blocked")
+                            {
+                                <tr>
+                                    <th>Initial Status:</th>
+                                    <td class="danger">@Model.InitialStatus</td>
+                                </tr>
+                            }
+
+                            <!--HR Screening-->
+                            @if (@Model.HRScreening == "Cleared")
+                            {
+                                <tr>
+                                    <th>HR Screening:</th>
+                                    <td class="success">@Model.HRScreening</td>
+                                </tr>
+                            }
+                            @if (@Model.HRScreening == "Pending")
+                            {
+                                <tr>
+                                    <th>HR Screening:</th>
+                                    <td class="warning">@Model.HRScreening</td>
+                                </tr>
+                            }
+                            @if (@Model.HRScreening == "Blocked")
+                            {
+                                <tr>
+                                    <th>HR Screening:</th>
+                                    <td class="danger">@Model.HRScreening</td>
+                                </tr>
+                            }
+
+                            <!--Department Assessment-->
+                            @if (Model.DeptAssessment == "Cleared")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="success">@Model.DeptAssessment</td>
+                                </tr>
+                            }
+                            @if (Model.DeptAssessment == "Pending")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="warning">@Model.DeptAssessment</td>
+                                </tr>
+                            }
+                            @if (Model.DeptAssessment == "Blocked")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="danger">@Model.DeptAssessment</td>
+                                </tr>
+                            }
+
+                            <!--Examination-->
+                            @if (Model.Examination == "Cleared")
+                            {
+                                <tr>
+                                    <th>Examination:</th>
+                                    <td class="success">@Model.Examination</td>
+                                </tr>
+                            }
+                            @if (Model.Examination == "Pending")
+                            {
+                                <tr>
+                                    <th>Examination:</th>
+                                    <td class="warning">@Model.Examination</td>
+                                </tr>
+                            }
+                            @if (Model.Examination == "Blocked")
+                            {
+                                <tr>
+                                    <th>Examination:</th>
+                                    <td class="danger">@Model.Examination</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div id="edit" class="form-group" style="width:80%">
+                        <button class="btn btn-primary" id="changeBtn"><span class="glyphicon glyphicon-briefcase"></span>  Change Status</button>
+
+                        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                        <h4>Applicant Status</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="modalForm">
+                                            <div class="well bs-component">
+
+                                                <div class="form-group center">
+                                                    <label for="menu1">Initial Status: </label>
+                                                    <select class="form-control" id="menu1">
+                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Cleared">Cleared</option>
+                                                        <option value="Blocked">Blocked</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group center">
+                                                    <label for="menu2">HR Screening: </label>
+                                                    <select class="form-control" id="menu2">
+                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Cleared">Cleared</option>
+                                                        <option value="Blocked">Blocked</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group center">
+                                                    <label for="menu3">Department Assessment: </label>
+                                                    <select class="form-control" id="menu3">
+                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Cleared">Cleared</option>
+                                                        <option value="Blocked">Blocked</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group center">
+                                                    <label for="menu4">Examination: </label>
+                                                    <select class="form-control" id="menu4">
+                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Cleared">Cleared</option>
+                                                        <option value="Blocked">Blocked</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="modalBtn" class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal">close</button>
+                                        <button type="button" data-bTeam-id="@Model.Id" class="btn btn-success js-save">
+                                            <span class="glyphicon glyphicon-check"></span> Save Changes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#buttons').on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Api/BetaList/" + button.attr("data-bTeam-id"),
+                            method: "DELETE",
+                            success: function () {
+                                window.location = "http://localhost:4428/BetaList/Index";
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('#changeBtn').on("click", function () {
+                $('#myModal').modal("show");
+            });
+
+            $('#modalBtn').on("click", ".js-save", function () {
+                var initialStatus = $("#menu1").val();
+                var hrScreening = $("#menu2").val();
+                var deptAssessment = $("#menu3").val();
+                var examination = $("#menu4").val();
+
+                var vm = {
+                    'initialStatus': initialStatus,
+                    'hrScreening': hrScreening,
+                    'deptAssessment': deptAssessment,
+                    'examination': examination
+                };
+
+                var button = $(this);
+                bootbox.confirm("Are you sure of the changes you made?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Api/BetaList/" + button.attr("data-bTeam-id"),
+                            method: "PUT",
+                            data: vm
+                        }).done(function () {
+                            toastr.success("Applicant Status has changed.");
+                        }).fail(function () {
+                            toastr.error("Unexpected Error!");
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

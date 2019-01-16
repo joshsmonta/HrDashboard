@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "CadIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h2><b>Central Administration Division</b></h2>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h4>HR</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="hrEmps"></td>
+                            <td id="hrVac"></td>
+                            <td id="hrTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="hrDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>Admin</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="adminEmps"></td>
+                            <td id="adminVac"></td>
+                            <td id="adminTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="adminDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h4>SSHE</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="ssheEmps"></td>
+                            <td id="ssheVac"></td>
+                            <td id="ssheTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="ssheDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>Cash Operations</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="cashEmps"></td>
+                            <td id="cashVac"></td>
+                            <td id="cashTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="cashDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h4>Miscellaneous</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="miscEmps"></td>
+                            <td id="miscVac"></td>
+                            <td id="miscTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="miscDept" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var miscVac = "";
+            var cashOpsVac = "";
+            var ssheVac = "";
+            var adminVac = "";
+            var hrVac = "";
+            function CountMisc() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 26,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("miscEmps").innerHTML = data;
+                    document.getElementById("miscVac").innerHTML = miscVac;
+                    document.getElementById("miscTotal").innerHTML = (data + miscVac);
+                });
+            }
+            function CountCashOps() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 25,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("cashEmps").innerHTML = data;
+                    document.getElementById("cashVac").innerHTML = cashOpsVac;
+                    document.getElementById("cashTotal").innerHTML = (data + cashOpsVac);
+                    CountMisc();
+                });
+            }
+            function CountSSHE() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 8,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("ssheEmps").innerHTML = data;
+                    document.getElementById("ssheVac").innerHTML = ssheVac;
+                    document.getElementById("ssheTotal").innerHTML = (data + ssheVac);
+                    CountCashOps();
+                });
+            }
+            function CountAdmin() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 7,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("adminEmps").innerHTML = data;
+                    document.getElementById("adminVac").innerHTML = adminVac;
+                    document.getElementById("adminTotal").innerHTML = (data + adminVac);
+                    CountSSHE();
+                });
+            }
+            function CountHR() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 6,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("hrEmps").innerHTML = data;
+                    document.getElementById("hrVac").innerHTML = hrVac;
+                    document.getElementById("hrTotal").innerHTML = (data + hrVac);
+                    CountAdmin();
+                });
+            }
+            function CountVacantMisc() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/26",
+                    dataType: "json"
+                }).done(function (data) {
+                    miscVac = data;
+                    CountHR();
+                });
+            }
+            function CountVacantCashOps() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/25",
+                    dataType: "json"
+                }).done(function (data) {
+                    cashOpsVac = data;
+                    CountVacantMisc();
+                });
+            }
+            function CountVacantSSHE() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/8",
+                    dataType: "json"
+                }).done(function (data) {
+                    ssheVac = data;
+                    CountVacantCashOps();
+                });
+            }
+            function CountVacantAdmin() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/7",
+                    dataType: "json"
+                }).done(function (data) {
+                    adminVac = data;
+                    CountVacantSSHE();
+                });
+            }
+            function CountVacantHR() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/6",
+                    dataType: "json"
+                }).done(function (data) {
+                    hrVac = data;
+                    CountVacantAdmin();
+                });
+            }
+            CountVacantHR();
+
+            $("#hrDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 6);
+            });
+            $("#adminDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 7);
+            });
+            $("#ssheDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 8);
+            });
+            $("#cashDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 25);
+            });
+            $("#miscDept").on("click", function () {
+                window.localStorage.setItem("theDeptId", 26);
+            });
+        });
+    </script>
+}
+

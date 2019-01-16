@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "DivisionByBu";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h3 id="allEmps"></h3>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h4>FAMS</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="famsEmps"></td>
+                            <td id="famsVac"></td>
+                            <td id="famsTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-anchor"></i>
+                </div>
+                <a id="fams" href="@Url.Action("FamsByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h4>CAD</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="cadEmps"></td>
+                            <td id="cadVac"></td>
+                            <td id="cadTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tripadvisor"></i>
+                </div>
+                <a id="cad" href="@Url.Action("CadByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h4>Logistics</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="logEmps"></td>
+                            <td id="logVac"></td>
+                            <td id="logTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-truck"></i>
+                </div>
+                <a id="logi" href="@Url.Action("LogByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h4>Sales Ops</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="salesEmps"></td>
+                            <td id="salesVac"></td>
+                            <td id="salesTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-black-tie"></i>
+                </div>
+                <a id="sales" href="@Url.Action("SodByBu", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var unitId = localStorage.getItem("unitId");
+            var unitName = localStorage.getItem("unitName");
+            var famsVacant = "";
+            var cadVacant = "";
+            var logVacant = "";
+            var salesVacant = "";
+
+            function CountAllEmps() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/unit/count/" + unitId,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("allEmps").innerHTML = unitName + " Personel: " + data;
+                });
+            }
+            function CountFams() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/count/" + unitId + "/1",
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("famsEmps").innerHTML = data;
+                    document.getElementById("famsVac").innerHTML = famsVacant;
+                    document.getElementById("famsTotal").innerHTML = (famsVacant + data);
+                    CountAllEmps();
+                });
+            }
+            function CountCad() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/count/" + unitId + "/2",
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("cadEmps").innerHTML = data;
+                    document.getElementById("cadVac").innerHTML = cadVacant;
+                    document.getElementById("cadTotal").innerHTML = (cadVacant + data);
+                    CountFams();
+                });
+            }
+            function CountLogi() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/count/" + unitId + "/3",
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("logEmps").innerHTML = data;
+                    document.getElementById("logVac").innerHTML = logVacant;
+                    document.getElementById("logTotal").innerHTML = (logVacant + data);
+                    CountCad();
+                });
+            }
+            function CountSales() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/count/" + unitId + "/4",
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("salesEmps").innerHTML = data;
+                    document.getElementById("salesVac").innerHTML = salesVacant;
+                    document.getElementById("salesTotal").innerHTML = (salesVacant + data);
+                    CountLogi();
+                });
+            }
+            function CountVacantFams() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/vacant/" + unitId + "/1",
+                    dataType: "json"
+                }).done(function (data) {
+                    famsVacant = data;
+                    CountSales();
+                });
+            }
+            function CountVacantCad() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/vacant/" + unitId + "/2",
+                    dataType: "json"
+                }).done(function (data) {
+                    cadVacant = data;
+                    CountVacantFams();
+                });
+            }
+            function CountVacantLog() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/vacant/" + unitId + "/3",
+                    dataType: "json"
+                }).done(function (data) {
+                    logVacant = data;
+                    CountVacantCad();
+                });
+            }
+            function CountVacantSales() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divunit/vacant/" + unitId + "/4",
+                    dataType: "json"
+                }).done(function (data) {
+                    salesVacant = data;
+                    CountVacantLog();
+                });
+            }
+            CountVacantSales();
+
+            $("#fams").on("click", function () {
+                window.localStorage.setItem("theDivId", 1);
+                window.localStorage.setItem("byBuIndicator", 1);
+            });
+            $("#cad").on("click", function () {
+                window.localStorage.setItem("theDivId", 2);
+                window.localStorage.setItem("byBuIndicator", 1);
+            });
+            $("#logi").on("click", function () {
+                window.localStorage.setItem("theDivId", 3);
+                window.localStorage.setItem("byBuIndicator", 1);
+            });
+            $("#sales").on("click", function () {
+                window.localStorage.setItem("theDivId", 4);
+                window.localStorage.setItem("byBuIndicator", 1);
+            });
+        });
+    </script>
+}

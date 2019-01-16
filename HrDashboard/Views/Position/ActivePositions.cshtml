@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ActivePositions";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Occupied Positions</h3>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Type</th>
+                                <th>Business Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#Table").DataTable({
+                ajax: {
+                    url: "/api/position/status/Active",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "posName" },
+                    { data: "posType" },
+                    { data: "businessUnit" }
+                ]
+            });
+        });
+    </script>    
+}

@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "SodIndex";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header">
+    <h2><b>Sales Operation Division</b></h2>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h4>Sonic One</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="oneEmps"></td>
+                            <td id="oneVac"></td>
+                            <td id="oneTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+                <a id="sonicOne" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>Sonic Two</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="twoEmps"></td>
+                            <td id="twoVac"></td>
+                            <td id="twoTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                <a id="sonicTwo" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h4>Sonic Three</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="threeEmps"></td>
+                            <td id="threeVac"></td>
+                            <td id="threeTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-github-alt"></i>
+                </div>
+                <a id="sonicThree" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>URIC/Selecta</h4>
+                    <table width="150">
+                        <tr>
+                            <th>Active</th>
+                            <th>Vacant</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td id="uricEmps"></td>
+                            <td id="uricVac"></td>
+                            <td id="uricTotal"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-optin-monster"></i>
+                </div>
+                <a id="uricSelecta" href="@Url.Action("OrgTable", "Chart")" class="small-box-footer">
+                    Organizational Table <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var s1Vac = "";
+            var s2Vac = "";
+            var s3Vac = "";
+            var uricVac = "";
+
+            function CountUric() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 14,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("uricEmps").innerHTML = data;
+                    document.getElementById("uricVac").innerHTML = uricVac;
+                    document.getElementById("uricTotal").innerHTML = (data + uricVac);
+                });
+            }
+            function CountSonicThree() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 13,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("threeEmps").innerHTML = data;
+                    document.getElementById("threeVac").innerHTML = s3Vac;
+                    document.getElementById("threeTotal").innerHTML = (data + s3Vac);
+                    CountUric();
+                });
+            }
+            function CountSonicTwo() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 12,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("twoEmps").innerHTML = data;
+                    document.getElementById("twoVac").innerHTML = s2Vac;
+                    document.getElementById("twoTotal").innerHTML = (data + s2Vac);
+                    CountSonicThree();
+                });
+            }
+            function CountSonicOne() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/count/" + 11,
+                    dataType: "json"
+                }).done(function (data) {
+                    document.getElementById("oneEmps").innerHTML = data;
+                    document.getElementById("oneVac").innerHTML = s1Vac;
+                    document.getElementById("oneTotal").innerHTML = (data + s1Vac);
+                    CountSonicTwo();
+                });
+            }
+            function CountVacantUric() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 14,
+                    dataType: "json"
+                }).done(function (data) {
+                    uricVac = data;
+                    CountSonicOne();
+                });
+            }
+            function CountVacantSonic3() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 13,
+                    dataType: "json"
+                }).done(function (data) {
+                    s3Vac = data;
+                    CountVacantUric();
+                });
+            }
+            function CountVacantSonic2() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 12,
+                    dataType: "json"
+                }).done(function (data) {
+                    s2Vac = data;
+                    CountVacantSonic3();
+                });
+            }
+            function CountVacantSonic1() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/dept/vacant/" + 11,
+                    dataType: "json"
+                }).done(function (data) {
+                    s1Vac = data;
+                    CountVacantSonic2();
+                });
+            }
+            CountVacantSonic1();
+
+            $("#sonicOne").on("click", function () {
+                window.localStorage.setItem("theDeptId", 11);
+            });
+            $("#sonicTwo").on("click", function () {
+                window.localStorage.setItem("theDeptId", 12);
+            });
+            $("#sonicThree").on("click", function () {
+                window.localStorage.setItem("theDeptId", 13);
+            });
+            $("#uricSelecta").on("click", function () {
+                window.localStorage.setItem("theDeptId", 14);
+            });
+        });
+    </script>
+}
+

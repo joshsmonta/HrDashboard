@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "VacantPositions";
+    Layout = "~/Views/Shared/_MainView.cshtml";
+}
+
+<section class="content-header"></section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Vacant Positions</h3>
+                </div>
+
+                <div class="box-body">
+                    <table id="Table" class="table table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Position</th>
+                                <th>Type</th>
+                                <th>Business Unit</th>
+                                <th>Button</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#Table").DataTable({
+                ajax: {
+                    url: "/api/position/status/Vacant",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "posId" },
+                    { data: "posName" },
+                    { data: "posType" },
+                    { data: "businessUnit" },
+                    {
+                        data: "posId",
+                        render: function (data) {
+                            return "<button class='btn btn-danger js-delete' data-position-id="+ data +">Deactivate</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#Table").on("click", ".js-delete", function() {
+                var deleteBtn = $(this);
+                bootbox.confirm("Are you sure you want to <b>Deactivate</b> this position?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/position/" + deleteBtn.attr("data-position-id"),
+                            method: "PUT",
+                            data: { "posStatus": "Inactive" },
+                            success: function () {
+                                deleteBtn.parents("tr").remove();
+                                toastr["warning"]("Position ID: " + deleteBtn.attr("data-position-id") + " is now Inactive.", "Attention!");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
