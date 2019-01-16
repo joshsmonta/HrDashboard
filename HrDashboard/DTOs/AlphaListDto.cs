@@ -37,7 +37,7 @@ namespace HrDashboard.DTOs
         public string TINNo { get; set; }
         public string ContactNumber { get; set; }
         public bool Active { get; set; }
-
+        public string FileName { get; set; }
         public int PosId { get; set; }
         [JsonIgnore]
         public virtual Position Position { get; set; }

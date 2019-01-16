@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201901070313127_BusinessUnitTable.Designer.cs">
       <DependentUpon>201901070313127_BusinessUnitTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901160855167_AddFileNameToAlphaList.cs" />
+    <Compile Include="Migrations\201901160855167_AddFileNameToAlphaList.Designer.cs">
+      <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelInitialize\HRView.cs" />
     <Compile Include="Models\AlphaList.cs" />
@@ -8456,6 +8460,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\upload\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -8526,6 +8531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901070313127_BusinessUnitTable.resx">
       <DependentUpon>201901070313127_BusinessUnitTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901160855167_AddFileNameToAlphaList.resx">
+      <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

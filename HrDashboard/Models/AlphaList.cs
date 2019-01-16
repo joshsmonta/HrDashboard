@@ -112,6 +112,8 @@ namespace HrDashboard.Models
          
         public bool Active { get; set; }
 
+        public string FileName { get; set; }
+
         public int? PosId { get; set; }
         [JsonIgnore]
         public virtual Position Position { get; set; }
