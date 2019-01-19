@@ -94,15 +94,17 @@
                             <tr class="info">
                                 <th>Details</th>
                                 <th class="text-center">Data</th>
+                                <th class="text-center">Remarks</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             <!--Initial Status-->
-                            @if (Model.InitialStatus == "Cleared")
+                            @if (Model.InitialStatus == "Passed")
                             {
                                 <tr>
                                     <th>Initial Status:</th>
                                     <td class="success">@Model.InitialStatus</td>
+                                    <td>@Model.InitStatRemarks</td>
                                 </tr>
                             }
                             @if (Model.InitialStatus == "Pending")
@@ -110,22 +112,25 @@
                                 <tr>
                                     <th>Initial Status:</th>
                                     <td class="warning">@Model.InitialStatus</td>
+                                    <td>@Model.InitStatRemarks</td>
                                 </tr>
                             }
-                            @if (Model.InitialStatus == "Blocked")
+                            @if (Model.InitialStatus == "Failed")
                             {
                                 <tr>
                                     <th>Initial Status:</th>
                                     <td class="danger">@Model.InitialStatus</td>
+                                    <td>@Model.InitStatRemarks</td>
                                 </tr>
                             }
 
                             <!--HR Screening-->
-                            @if (@Model.HRScreening == "Cleared")
+                            @if (@Model.HRScreening == "Passed")
                             {
                                 <tr>
                                     <th>HR Screening:</th>
                                     <td class="success">@Model.HRScreening</td>
+                                    <td>@Model.HrRemarks</td>
                                 </tr>
                             }
                             @if (@Model.HRScreening == "Pending")
@@ -133,45 +138,25 @@
                                 <tr>
                                     <th>HR Screening:</th>
                                     <td class="warning">@Model.HRScreening</td>
+                                    <td>@Model.HrRemarks</td>
                                 </tr>
                             }
-                            @if (@Model.HRScreening == "Blocked")
+                            @if (@Model.HRScreening == "Failed")
                             {
                                 <tr>
                                     <th>HR Screening:</th>
                                     <td class="danger">@Model.HRScreening</td>
-                                </tr>
-                            }
-
-                            <!--Department Assessment-->
-                            @if (Model.DeptAssessment == "Cleared")
-                            {
-                                <tr>
-                                    <th>Department Assessment:</th>
-                                    <td class="success">@Model.DeptAssessment</td>
-                                </tr>
-                            }
-                            @if (Model.DeptAssessment == "Pending")
-                            {
-                                <tr>
-                                    <th>Department Assessment:</th>
-                                    <td class="warning">@Model.DeptAssessment</td>
-                                </tr>
-                            }
-                            @if (Model.DeptAssessment == "Blocked")
-                            {
-                                <tr>
-                                    <th>Department Assessment:</th>
-                                    <td class="danger">@Model.DeptAssessment</td>
+                                    <td>@Model.HrRemarks</td>
                                 </tr>
                             }
 
                             <!--Examination-->
-                            @if (Model.Examination == "Cleared")
+                            @if (Model.Examination == "Passed")
                             {
                                 <tr>
                                     <th>Examination:</th>
                                     <td class="success">@Model.Examination</td>
+                                    <td>@Model.ExamRemarks</td>
                                 </tr>
                             }
                             @if (Model.Examination == "Pending")
@@ -179,13 +164,41 @@
                                 <tr>
                                     <th>Examination:</th>
                                     <td class="warning">@Model.Examination</td>
+                                    <td>@Model.ExamRemarks</td>
                                 </tr>
                             }
-                            @if (Model.Examination == "Blocked")
+                            @if (Model.Examination == "Failed")
                             {
                                 <tr>
                                     <th>Examination:</th>
                                     <td class="danger">@Model.Examination</td>
+                                    <td>@Model.ExamRemarks</td>
+                                </tr>
+                            }
+
+                            <!--Department Assessment-->
+                            @if (Model.DeptAssessment == "Passed")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="success">@Model.DeptAssessment</td>
+                                    <td>@Model.DeptRemarks</td>
+                                </tr>
+                            }
+                            @if (Model.DeptAssessment == "Pending")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="warning">@Model.DeptAssessment</td>
+                                    <td>@Model.DeptRemarks</td>
+                                </tr>
+                            }
+                            @if (Model.DeptAssessment == "Failed")
+                            {
+                                <tr>
+                                    <th>Department Assessment:</th>
+                                    <td class="danger">@Model.DeptAssessment</td>
+                                    <td>@Model.DeptRemarks</td>
                                 </tr>
                             }
                         </tbody>
@@ -203,44 +216,64 @@
                                     </div>
                                     <div class="modal-body">
                                         <form id="modalForm">
-                                            <div class="well bs-component">
-
-                                                <div class="form-group center">
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
                                                     <label for="menu1">Initial Status: </label>
                                                     <select class="form-control" id="menu1">
                                                         <option value="Pending" selected="selected">Pending</option>
-                                                        <option value="Cleared">Cleared</option>
-                                                        <option value="Blocked">Blocked</option>
+                                                        <option value="Passed">Passed</option>
+                                                        <option value="Failed">Failed</option>
                                                     </select>
                                                 </div>
 
-                                                <div class="form-group center">
+                                                <div class="form-group">
                                                     <label for="menu2">HR Screening: </label>
                                                     <select class="form-control" id="menu2">
                                                         <option value="Pending" selected="selected">Pending</option>
-                                                        <option value="Cleared">Cleared</option>
-                                                        <option value="Blocked">Blocked</option>
+                                                        <option value="Passed">Passed</option>
+                                                        <option value="Failed">Failed</option>
                                                     </select>
                                                 </div>
 
-                                                <div class="form-group center">
-                                                    <label for="menu3">Department Assessment: </label>
-                                                    <select class="form-control" id="menu3">
-                                                        <option value="Pending" selected="selected">Pending</option>
-                                                        <option value="Cleared">Cleared</option>
-                                                        <option value="Blocked">Blocked</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group center">
+                                                <div class="form-group">
                                                     <label for="menu4">Examination: </label>
                                                     <select class="form-control" id="menu4">
                                                         <option value="Pending" selected="selected">Pending</option>
-                                                        <option value="Cleared">Cleared</option>
-                                                        <option value="Blocked">Blocked</option>
+                                                        <option value="Passed">Passed</option>
+                                                        <option value="Failed">Failed</option>
                                                     </select>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label for="menu3">Department Assessment: </label>
+                                                    <select class="form-control" id="menu3">
+                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Passed">Passed</option>
+                                                        <option value="Failed">Failed</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label>Initial Remarks: </label>
+                                                    <input id="initRemarks" name="initRemarks" type="text" value="" class="form-control input-sm" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>HR Remarks: </label>
+                                                    <input id="hrRemarks" name="hrRemarks" type="text" value="" class="form-control input-sm" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Exam Remarks: </label>
+                                                    <input id="examRemarks" name="examRemarks" type="text" value="" class="form-control input-sm" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Department Remarks: </label>
+                                                    <input id="deptRemarks" name="deptRemarks" type="text" value="" class="form-control input-sm" />
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -288,12 +321,20 @@
                 var hrScreening = $("#menu2").val();
                 var deptAssessment = $("#menu3").val();
                 var examination = $("#menu4").val();
+                var initRemarks = $("initRemarks").val();
+                var hrRemarks = $("hrRemarks").val();
+                var examRemarks = $("examRemarks").val();
+                var deptRemarks = $("deptRemarks").val();
 
                 var vm = {
                     'initialStatus': initialStatus,
                     'hrScreening': hrScreening,
                     'deptAssessment': deptAssessment,
-                    'examination': examination
+                    'examination': examination,
+                    'initStatRemarks': initRemarks,
+                    'hrRemarks': hrRemarks,
+                    'examRemarks': examRemarks,
+                    'deptRemarks': deptRemarks
                 };
 
                 var button = $(this);

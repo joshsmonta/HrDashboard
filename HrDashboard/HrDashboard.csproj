@@ -297,6 +297,10 @@
     <Compile Include="Migrations\201901160855167_AddFileNameToAlphaList.Designer.cs">
       <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901190734048_AdditionalColumnsInBetaList.cs" />
+    <Compile Include="Migrations\201901190734048_AdditionalColumnsInBetaList.Designer.cs">
+      <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelInitialize\HRView.cs" />
     <Compile Include="Models\AlphaList.cs" />
@@ -8534,6 +8538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901160855167_AddFileNameToAlphaList.resx">
       <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901190734048_AdditionalColumnsInBetaList.resx">
+      <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

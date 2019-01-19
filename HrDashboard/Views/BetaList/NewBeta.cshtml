@@ -61,7 +61,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input id="dateApplied" name="dateApplied" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
+                                <input id="dateApplied" name="dateApplied" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask/>
                             </div>
                         </div>
 
@@ -104,7 +104,6 @@
                             <label>Remarks:</label>
                             <input id="remarks" name="remarks" type="text" value="" class="form-control input-sm" />
                         </div>
-
                         <input type="text" id="initialStatus" name="initialStatus" value="Pending" style="display: none" />
                         <input type="text" id="hrScreening" name="hrScreening" value="Pending" style="display: none" />
                         <input type="text" id="deptAssessment" name="deptAssessment" value="Pending" style="display: none" />
@@ -126,7 +125,6 @@
             $('[data-mask]').inputmask()
 
             $('#newForm').submit(function (e) {
-
                 var fName = $('#fName').val();
                 var mName = $('#mName').val();
                 var lName = $('#lName').val();
@@ -191,13 +189,11 @@
                         educationalBg.val("");
                         school.val("");
                         remarks.val("");
-
                         vm = {};
                     })
                     .fail(function () {
                         toastr["error"]("Something Unexpected Happened, Contact IT for more info.", "Oh No!");
                     });
-
                 return false;
             });
         });
