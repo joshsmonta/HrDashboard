@@ -13,6 +13,16 @@ namespace HrDashboard.Controllers
 {
     public class UserController : Controller
     {
+        HRContext context;
+        public UserController()
+        {
+            context = new HRContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            context.Dispose();
+        }
+
         //Registration Action
         [HttpGet]
         [CustomAuthorize(Roles = RoleName.Admin)]
@@ -54,17 +64,13 @@ namespace HrDashboard.Controllers
                 users.IsEmailVerified = false;
 
                 #region Save Data to Database
-                using (HRContext context = new HRContext())
-                {
-                    context.UsersDbSet.Add(users);
-                    context.SaveChanges();
-
-                    //Send Email to User
-                    SendVerificationLinkEmail(users.Email, users.ActivationCode.ToString());
-                    message = "Just a few more steps, registration was a success. An account activation link" +
-                        " has been sent to your E-mail account: " + users.Email + ", please open your e-mail for the activation.";
-                    status = true;
-                }
+                context.UsersDbSet.Add(users);
+                context.SaveChanges();
+                //Send Email to User
+                SendVerificationLinkEmail(users.Email, users.ActivationCode.ToString());
+                message = "Just a few more steps, registration was a success. An account activation link" +
+                    " has been sent to your E-mail account: " + users.Email + ", please open your e-mail for the activation.";
+                status = true;
                 #endregion
             }
             else
@@ -82,22 +88,19 @@ namespace HrDashboard.Controllers
         public ActionResult VerifyAccount(string id)
         {
             bool status = false;
-
-            using (HRContext context = new HRContext())
+            
+            //to avoid confirm password does not match issue on save changes
+            context.Configuration.ValidateOnSaveEnabled = false;
+            var query = context.UsersDbSet.Where(c => c.ActivationCode == new Guid(id)).FirstOrDefault();
+            if (query != null)
             {
-                //to avoid confirm password does not match issue on save changes
-                context.Configuration.ValidateOnSaveEnabled = false;
-                var query = context.UsersDbSet.Where(c => c.ActivationCode == new Guid(id)).FirstOrDefault();
-                if (query != null)
-                {
-                    query.IsEmailVerified = true;
-                    context.SaveChanges();
-                    status = true;
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid Request";
-                }
+                query.IsEmailVerified = true;
+                context.SaveChanges();
+                status = true;
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Request";
             }
             ViewBag.Status = status;
             return View();
@@ -162,13 +165,10 @@ namespace HrDashboard.Controllers
         [NonAction]
         public bool DoesEmailExist(string emailId)
         {
-            using (HRContext context = new HRContext())
-            {
-                var email = context.UsersDbSet.Where(a => a.Email == emailId).FirstOrDefault();
-                if (email == null)
-                { return false; }
-                else { return true; }
-            }
+            var email = context.UsersDbSet.Where(a => a.Email == emailId).FirstOrDefault();
+            if (email == null)
+            { return false; }
+            else { return true; }
         }
 
         [NonAction]
