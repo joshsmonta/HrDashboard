@@ -40,47 +40,66 @@
 
 @section scripts
 {
-<script>
-    $(document).ready(function () {
-        $("#newBtn").on("click", function () {
-            window.localStorage.setItem("editBool", 0);
-        })
-
-        var successBool = localStorage.getItem("successBool");
-        if(successBool == 1){
-            toastr["warning"]("Record has now been removed. Transfered to Archives.", "Important!");
-            toastr["success"]("New Vacant Position has been opened.", "Notice!");
-            window.localStorage.setItem("successBool", 0);
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         }
-        
-        var table = $("#Table").DataTable({
-            ajax: {
-                url: "/api/alphalist",
-                dataSrc: ""
-            },
-            columns: [
-                {
-                    data: "id"
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#newBtn").on("click", function () {
+                window.localStorage.setItem("editBool", 0);
+            })
+
+            var successBool = localStorage.getItem("successBool");
+            if (successBool == 1) {
+                toastr["warning"]("Record has now been removed. Transfered to Archives.", "Important!");
+                toastr["success"]("New Vacant Position has been opened.", "Notice!");
+                window.localStorage.setItem("successBool", 0);
+            }
+
+            var table = $("#Table").DataTable({
+                ajax: {
+                    url: "/api/alphalist",
+                    dataSrc: ""
                 },
-                {
-                    data: "id",
-                    render: function(data, type, alphalist) {
-                        return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, alphalist) {
+                            return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
+                        }
+                    },
+                    {
+                        data: "presentPosition"
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, alphalist) {
+                            var date = alphalist.dateOfHire;
+                            var format = "MM/DD/YYYY";
+                            return moment(date).format(format);
+                        }
                     }
-                },
-                {
-                    data: "presentPosition"
-                },
-                {
-                    data: "id",
-                    render: function (data, type, alphalist) {
-                        var date = alphalist.dateOfHire;
-                        var format = "MM/DD/YYYY";
-                        return moment(date).format(format);
-                    }
-                }
-            ]
+                ]
+            });
         });
-    });
-</script>
+    </script>
 }

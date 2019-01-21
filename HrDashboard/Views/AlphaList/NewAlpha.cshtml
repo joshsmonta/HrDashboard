@@ -20,7 +20,7 @@
                             <input id="image-file" type="file" />
                         </div>
                         <div class="col-xs-2">
-                            <img src="~/Content/dist/img/avatar.png" alt="Smiley face" width="42" height="42" border="5">
+                            <img id="profPic" src="~/Content/dist/img/avatar.png" alt="Smiley face" width="150" height="150">
                         </div><br />
                         <div class="col-xs-8">
                             <button class="btn btn-default btn-flat">upload</button>
@@ -213,6 +213,23 @@
     <script>
         $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
         $('[data-mask]').inputmask();
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
     </script>
     <script>
         $(document).ready(function () {
@@ -276,10 +293,9 @@
                     xhr.send(formdata);
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState == 4 && xhr.status == 200) {
-                            alert(xhr.responseText);
+                            toastr["warning"]("Picture has been uploaded, make sure to click <b>SAVE CHANGES</b>", "Success");
                         }
                     }
-                    console.log(imgName);
                     return false;
                 });
                 $('#newForm').submit(function (e) {

@@ -3,7 +3,7 @@
     ViewBag.Title = "ATDetails";
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
-
+<script src="~/Content/JavaScriptLoadImage/js/load-image.all.min.js"></script>
 <section class="content-header">
     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
     {
@@ -22,8 +22,14 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header">
-                    <h1 class="text-primary">@Model.FirstName @Model.MiddleName @Model.LastName</h1>
-                    <img src="" />
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <h1 class="text-primary" style="display:inline-block; float:left">@Model.FirstName @Model.MiddleName @Model.LastName</h1>
+                                <img src="#" id="imgProfile" style="width: 150px; height: 150px; display:inline-block; float:right" class="img-rounded img-responsive" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body">
                     <ul class="nav nav-tabs">
@@ -173,6 +179,47 @@
 
 @section scripts
 {
+    <script>
+        loadImage.parseMetaData(blobOrFile, function (data) {
+            //default image orientation
+            var orientation = 0;
+            //if exif data available, update orientation
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
+            var loadingImage = loadImage(
+                blobOrFile,
+                function (canvas) {
+                    //here's the base64 data result
+                    var base64data = canvas.toDataURL('image/jpeg');
+                    //here's example to show it as on imae preview
+                    var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                    $('#result-preview').attr('src', base64data);
+                }, {
+                    //should be set to canvas : true to activate auto fix orientation
+                    canvas: true,
+                    orientation: orientation
+                }
+            );
+        });
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
     <script>
         $(document).ready(function () {
             $("#editBtn").on("click", function () {

@@ -27,5 +27,9 @@ namespace HrDashboard.DTOs
         public string HRScreening { get; set; }
         public string Examination { get; set; }
         public string DeptAssessment { get; set; }
+        public string InitStatRemarks { get; set; }
+        public string HrRemarks { get; set; }
+        public string ExamRemarks { get; set; }
+        public string DeptRemarks { get; set; }
     }
 }

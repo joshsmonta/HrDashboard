@@ -53,6 +53,10 @@ namespace HrDashboard.Controllers.Api
             bTeam.HRScreening = betaListDto.HRScreening;
             bTeam.DeptAssessment = betaListDto.DeptAssessment;
             bTeam.Examination = betaListDto.Examination;
+            bTeam.InitStatRemarks = betaListDto.InitStatRemarks;
+            bTeam.HrRemarks = betaListDto.HrRemarks;
+            bTeam.ExamRemarks = betaListDto.ExamRemarks;
+            bTeam.DeptRemarks = betaListDto.DeptRemarks;
             context.SaveChanges();
 
             return Ok();

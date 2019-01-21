@@ -220,7 +220,7 @@
                                                 <div class="form-group">
                                                     <label for="menu1">Initial Status: </label>
                                                     <select class="form-control" id="menu1">
-                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Passed">Passed</option>
                                                         <option value="Failed">Failed</option>
                                                     </select>
@@ -229,7 +229,7 @@
                                                 <div class="form-group">
                                                     <label for="menu2">HR Screening: </label>
                                                     <select class="form-control" id="menu2">
-                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Passed">Passed</option>
                                                         <option value="Failed">Failed</option>
                                                     </select>
@@ -238,7 +238,7 @@
                                                 <div class="form-group">
                                                     <label for="menu4">Examination: </label>
                                                     <select class="form-control" id="menu4">
-                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Passed">Passed</option>
                                                         <option value="Failed">Failed</option>
                                                     </select>
@@ -247,7 +247,7 @@
                                                 <div class="form-group">
                                                     <label for="menu3">Department Assessment: </label>
                                                     <select class="form-control" id="menu3">
-                                                        <option value="Pending" selected="selected">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Passed">Passed</option>
                                                         <option value="Failed">Failed</option>
                                                     </select>
@@ -257,22 +257,22 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label>Initial Remarks: </label>
-                                                    <input id="initRemarks" name="initRemarks" type="text" value="" class="form-control input-sm" />
+                                                    <input id="initRemarks" name="initRemarks" type="text" value="" class="form-control" />
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>HR Remarks: </label>
-                                                    <input id="hrRemarks" name="hrRemarks" type="text" value="" class="form-control input-sm" />
+                                                    <input id="hrRemarks" name="hrRemarks" type="text" value="" class="form-control" />
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Exam Remarks: </label>
-                                                    <input id="examRemarks" name="examRemarks" type="text" value="" class="form-control input-sm" />
+                                                    <input id="examRemarks" name="examRemarks" type="text" value="" class="form-control" />
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Department Remarks: </label>
-                                                    <input id="deptRemarks" name="deptRemarks" type="text" value="" class="form-control input-sm" />
+                                                    <input id="deptRemarks" name="deptRemarks" type="text" value="" class="form-control" />
                                                 </div>
                                             </div>
                                         </form>
@@ -297,6 +297,20 @@
 {
     <script>
         $(document).ready(function () {
+
+            var button = $("#buttons .js-delete");
+            
+            $.ajax({
+                type: "GET",
+                url: "/api/betalist/" + button.attr("data-bTeam-id"),
+                dataType: "json"
+            }).done(function (data) {
+                $("#menu1").val(data.initialStatus);
+                $("#menu2").val(data.hrScreening);
+                $("#menu3").val(data.deptAssessment);
+                $("#menu4").val(data.examination);
+            });
+            
             $('#buttons').on("click", ".js-delete", function () {
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete?", function (result) {
@@ -321,10 +335,10 @@
                 var hrScreening = $("#menu2").val();
                 var deptAssessment = $("#menu3").val();
                 var examination = $("#menu4").val();
-                var initRemarks = $("initRemarks").val();
-                var hrRemarks = $("hrRemarks").val();
-                var examRemarks = $("examRemarks").val();
-                var deptRemarks = $("deptRemarks").val();
+                var initRemarks = $("#initRemarks").val();
+                var hrRemarks = $("#hrRemarks").val();
+                var examRemarks = $("#examRemarks").val();
+                var deptRemarks = $("#deptRemarks").val();
 
                 var vm = {
                     'initialStatus': initialStatus,
@@ -346,6 +360,7 @@
                             data: vm
                         }).done(function () {
                             toastr.success("Applicant Status has changed.");
+                            console.log(initRemarks + hrRemarks + examRemarks + deptRemarks);
                         }).fail(function () {
                             toastr.error("Unexpected Error!");
                         });
