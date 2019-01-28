@@ -20,7 +20,7 @@
                             <input id="image-file" type="file" />
                         </div>
                         <div class="col-xs-2">
-                            <img id="profPic" src="~/Content/dist/img/avatar.png" alt="Smiley face" width="150" height="150">
+                            <img id="profPic" src="~/Content/dist/img/userphoto.png" alt="Smiley face" width="150" height="150">
                         </div><br />
                         <div class="col-xs-8">
                             <button class="btn btn-default btn-flat">upload</button>
@@ -58,7 +58,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input id="dateOfBirth" name="dateOfBirth" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
+                                    <input id="dateOfBirth" name="dateOfBirth" type="text" value="" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask />
                                 </div>
                             </div>
 
@@ -123,7 +123,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input id="dateOfHire" name="dateOfHire" type="text" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                    <input id="dateOfHire" name="dateOfHire" type="text" value="" class="form-control input-sm" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
 
@@ -241,6 +241,7 @@
                 var positionId = "";
                 var empId = "";
                 var nameOfATeam = "";
+                var format = "MM/DD/YYYY";
                 document.getElementById("presentPosition").disabled = true;
                 $.ajax({
                     type: "GET",
@@ -250,7 +251,7 @@
                     $('#firstName').val(data.firstName);
                     $('#middleName').val(data.middleName);
                     $('#lastName').val(data.lastName);
-                    $('#dateOfBirth').val(data.dateOfBirth);
+                    $('#dateOfBirth').val(moment(data.dateOfBirth).format(format));
                     $('#sex').val(data.sex);
                     $('#civilStatus').val(data.civilStatus);
                     $('#sssNo').val(data.sssNo);
@@ -260,7 +261,7 @@
                     $('#tinNo').val(data.tinNo);
                     $('#contactNumber').val(data.contactNumber);
                     $('#permanentAddress').val(data.permanentAddress);
-                    $('#dateOfHire').val(data.dateOfHire);
+                    $('#dateOfHire').val(moment(data.dateOfHire).format(format));
                     $('#description').val(data.description);
                     $('#jobGrade').val(data.jobGrade);
                     $('#basicSalary').val(data.basicSalary);
@@ -269,7 +270,7 @@
                     $('#slCredits').val(data.slCredits);
                     $('#areaOfAssignment').val(data.areaOfAssignment);
                     $('#employmentStatus').val(data.employmentStatus);
-                    $('#dateOfRegularization').val(data.dateOfRegularization);
+                    $('#dateOfRegularization').val(moment(data.dateOfRegularization).format(format));
                     $('#temporaryId').val(data.temporaryId);
                     $('#permanentId').val(data.permanentId);
                     $('#presentPosition').val(data.presentPosition);

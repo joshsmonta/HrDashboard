@@ -6,6 +6,12 @@
 
 <section class="content-header">
     <h3 id="allEmps"></h3>
+    <div class="box-widget widget-user">
+        <div class="widget-user-header bg-olive">
+            <h3 id="headName" class="widget-user-username"></h3>
+            <h5 id="headPos" class="widget-user-desc"></h5>
+        </div>
+    </div>
 </section>
 <section class="content">
     <div class="row">
@@ -153,7 +159,23 @@
             var ssheVac = "";
             var adminVac = "";
             var hrVac = "";
-
+            function GetDivHead() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divhead/2",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data == null) {
+                        document.getElementById("headName").innerHTML = "Still Vacant";
+                        document.getElementById("headPos").innerHTML = "Division Head";
+                    }
+                    else {
+                        document.getElementById("headName").innerHTML = "" + data.firstName + " " + data.middleName + " " + data.lastName + "";
+                        document.getElementById("headPos").innerHTML = data.presentPosition;
+                        console.log("/Content/upload/images/" + data.fileName);
+                    }
+                });
+            }
             function CountMisc() {
                 $.ajax({
                     type: "GET",
@@ -163,6 +185,7 @@
                     document.getElementById("miscEmps").innerHTML = data;
                     document.getElementById("miscVac").innerHTML = miscVac;
                     document.getElementById("miscTotal").innerHTML = (data + miscVac);
+                    GetDivHead();
                 });
             }
             function CountCashOps() {

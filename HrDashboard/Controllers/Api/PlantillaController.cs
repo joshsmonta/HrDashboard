@@ -73,8 +73,8 @@ namespace HrDashboard.Controllers.Api
                              a.PresentPosition,
                              p.Position.PosType,
                              p.Position.BusinessUnit
-                         });
-            return Ok(query.ToList());
+                         }).SingleOrDefault();
+            return Ok(query);
         }
         
         [Route("api/plantilla/dept/count/{deptId}")]
@@ -121,6 +121,26 @@ namespace HrDashboard.Controllers.Api
             return Ok(count);
         }
 
+        [Route("api/plantilla/divhead/{divId}")]
+        [HttpGet]
+        public IHttpActionResult GetDivisionHead(int divId)
+        {
+            var divHead = (from a in context.AlphaLists
+                           join p in context.Plantillas on a.PosId equals p.Position.PosId
+                           where p.Position.DivId == divId && p.Position.PosType == "Division Head"
+                           select new {
+                               a.Id,
+                               a.FirstName,
+                               a.MiddleName,
+                               a.LastName,
+                               a.PresentPosition,
+                               a.FileName,
+                               p.Position.PosType,
+                               p.Position.BusinessUnit
+                           }).SingleOrDefault();
+            return Ok(divHead);
+        }
+
         //count all via business unit and dept
         [Route("api/plantilla/deptunit/count/{unitId}/{deptId}")]
         [HttpGet]
@@ -154,9 +174,7 @@ namespace HrDashboard.Controllers.Api
                          select p).Count();
             return Ok(count);
         }
-
         
-
         [HttpDelete]
         public IHttpActionResult DeletePlant(int id)
         {

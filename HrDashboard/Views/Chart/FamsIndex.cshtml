@@ -1,11 +1,16 @@
-﻿        
+﻿
 @{
     ViewBag.Title = "FamsIndex";
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
-
 <section class="content-header">
     <h2><b>FAMS Division</b></h2>
+    <div class="box-widget widget-user">
+        <div class="widget-user-header bg-olive">
+            <h3 id="headName" class="widget-user-username"></h3>
+            <h5 id="headPos" class="widget-user-desc"></h5>
+        </div>
+    </div>
 </section>
 <section class="content">
     <div class="row">
@@ -122,12 +127,28 @@
 {
     <script>
         $(document).ready(function () {
-            
             var financeVac = "";
             var acctVac = "";
             var itVac = "";
             var ipprVac = "";
-            
+
+            function GetDivHead() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/plantilla/divhead/1",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data == null) {
+                        document.getElementById("headName").innerHTML = "Still Vacant";
+                        document.getElementById("headPos").innerHTML = "Division Head";
+                    }
+                    else {
+                        document.getElementById("headName").innerHTML = "" + data.firstName + " " + data.middleName + " " + data.lastName + "";
+                        document.getElementById("headPos").innerHTML = data.presentPosition;
+                        console.log("/Content/upload/images/" + data.fileName);
+                    }
+                });
+            }
             function GetIpprNumbers() {
                 $.ajax({
                     type: "GET",
@@ -137,6 +158,7 @@
                     document.getElementById("ipprEmps").innerHTML = data;
                     document.getElementById("ipprVac").innerHTML = ipprVac;
                     document.getElementById("ipprTotal").innerHTML = (data + ipprVac);
+                    GetDivHead();
                 });
             }
             function GetItNumbers() {

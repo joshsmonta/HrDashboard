@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HrDashboard.ModelInitialize;
+using HrDashboard.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +10,6 @@ namespace HrDashboard.Controllers
 {
     public class ChartController : Controller
     {
-        // GET: Chart
         public ActionResult FamsIndex()
         { return View(); }
 
