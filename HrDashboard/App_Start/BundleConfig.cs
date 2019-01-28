@@ -42,6 +42,7 @@ namespace HrDashboard
                 .Include("~/Scripts/DataTables/datatables.bootstrap.min.js")
                 .Include("~/Scripts/bootbox.min.js")
                 .Include("~/Scripts/toastr.min.js")
+                .Include("~/Scripts/Chart.min.js")
                 .Include("~/Scripts/DataTables/dataRender/datatime.js")
                 .Include("~/Content/bower_components/jquery-slimscroll/jquery.slimscroll.min.js")
                 .Include("~/Content/plugins/input-mask/jquery.inputmask.js")
