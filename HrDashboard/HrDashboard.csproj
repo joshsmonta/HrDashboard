@@ -304,6 +304,10 @@
     <Compile Include="Migrations\201901190734048_AdditionalColumnsInBetaList.Designer.cs">
       <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.cs" />
+    <Compile Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.Designer.cs">
+      <DependentUpon>201901300249229_FixBusinessUnitModelInPositionModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelInitialize\HRView.cs" />
     <Compile Include="Models\AlphaList.cs" />
@@ -8555,6 +8559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901190734048_AdditionalColumnsInBetaList.resx">
       <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.resx">
+      <DependentUpon>201901300249229_FixBusinessUnitModelInPositionModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -2,108 +2,190 @@
     var ctx1 = $("#pieChart1");
     var ctx2 = $("#pieChart2");
     var ctx3 = $("#pieChart3");
-
-    var data1 = {
-        labels: ["FAMS", "CAD", "Logistics", "Sales Ops", "Canaan Farm"],
-        datasets: [
-            {
-                label: "Divisions",
-                data : [10, 50, 25, 70, 40],
-                backgroundColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954',
-                    '#00a65a',
-                    '#3c8dbc'
-                ],
-                borderColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954',
-                    '#00a65a',
-                    '#3c8dbc'
-                ],
-                borderWidth: [1, 1, 1, 1, 1]
-            }
-        ]
-    };
-
-    var data2 = {
-        labels: ["Occupied", "Vacant", "Inactive"],
-        datasets: [
-            {
-                label: "Positions",
-                data: [10, 50, 25],
-                backgroundColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954'
-                ],
-                borderColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954'
-                ],
-                borderWidth: [1, 1, 1]
-            }
-        ]
-    };
-
-    var data3 = {
-        labels: ["Sonic One", "Sonic Two", "Sonic Three", "UFS", "Selecta", "Goodyear", "Komeya", "Canaan", "Shared"],
-        datasets: [
-            {
-                label: "Business Units",
-                data: [50, 20, 60, 80, 25, 62, 45, 62, 40],
-                backgroundColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954',
-                    '#00a65a',
-                    '#3c8dbc',
-                    '#81D8D0',
-                    '#8A2BE2',
-                    '#FF6666',
-                    '#FFC0CB'
-                ],
-                borderColor: [
-                    '#00c0ef',
-                    '#f39c12',
-                    '#f56954',
-                    '#00a65a',
-                    '#3c8dbc',
-                    '#81D8D0',
-                    '#8A2BE2',
-                    '#FF6666',
-                    '#FFC0CB'
-                ],
-                borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-            }
-        ]
-    };
-
+    var famsCount = 0;
+    var cadCount = 0;
+    var logCount = 0;
+    var salesCount = 0;
+    var canaanCount = 0;
     var optChart = {
         legend: {
             display: true,
-            position: "bottom"
+            position: "left"
         }
     };
-
-    var chart1 = new Chart(ctx1, {
-        type: "doughnut",
-        data: data1,
-        options: optChart
-    });
-
-    var chart2 = new Chart(ctx2, {
-        type: "doughnut",
-        data: data2,
-        options: optChart
-    });
-
-    var chart3 = new Chart(ctx3, {
-        type: "doughnut",
-        data: data3,
-        options: optChart
-    });
+    function GetAllEmpsByBu() {
+        var labelArray = [];
+        var dataArray = [];
+        $.ajax({
+            type: "GET",
+            url: "/api/position/countallbybu",
+            dataType: "json"
+        }).done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].units == "Sonic One") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Sonic Two") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Sonic Three") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "UFS") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Selecta") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Goodyear") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Komeya") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Canaan") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].units == "Shared") {
+                    labelArray.push(data[i].units);
+                    dataArray.push(data[i].count);
+                }
+            }
+            var data3 = {
+                labels: labelArray,
+                datasets: [{
+                    label: "Business Units",
+                    data: dataArray,
+                    backgroundColor: [
+                        '#ff4000',
+                        '#ffbf00',
+                        '#ffff00',
+                        '#80ff00',
+                        '#00ffbf',
+                        '#00bfff',
+                        '#0040ff',
+                        '#bf00ff',
+                        '#ff0040'
+                    ]
+                }]
+            }
+            var chart3 = new Chart(ctx3, {
+                type: "doughnut",
+                data: data3,
+                options: optChart
+            });
+        });
+    }
+    function GetAllPositionStatus() {
+        var labelArray = [];
+        var dataArray = [];
+        $.ajax({
+            type: "GET",
+            url: "/api/position/allstatus",
+            dataType: "json"
+        }).done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].posStatus == "Active") {
+                    labelArray.push(data[i].posStatus);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].posStatus == "Vacant") {
+                    labelArray.push(data[i].posStatus);
+                    dataArray.push(data[i].count);
+                }
+                else if (data[i].posStatus == "Inactive") {
+                    labelArray.push(data[i].posStatus);
+                    dataArray.push(data[i].count);
+                }
+            }
+            var data2 = {
+                labels: labelArray,
+                datasets: [
+                    {
+                        label: "Positions",
+                        data: dataArray,
+                        backgroundColor: [
+                            '#00c0ef',
+                            '#f39c12',
+                            '#f56954'
+                        ]
+                    }
+                ]
+            };
+            var chart2 = new Chart(ctx2, {
+                type: "doughnut",
+                data: data2,
+                options: optChart
+            });
+            GetAllEmpsByBu();
+        });
+    }
+    function GetDivisionNumbers() {
+        var labelArray = [];
+        var divCountArray = [];
+        $.ajax({
+            type: "GET",
+            url: "/api/position/allposperdiv",
+            dataType: "json"
+        }).done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].divIds == 1) {
+                    famsCount = data[i].count;
+                    divCountArray.push(famsCount);
+                    labelArray.push("FAMS");
+                }
+                else if (data[i].divIds == 2) {
+                    cadCount = data[i].count;
+                    divCountArray.push(cadCount);
+                    labelArray.push("CAD");
+                }
+                else if (data[i].divIds == 3) {
+                    logCount = data[i].count;
+                    divCountArray.push(logCount);
+                    labelArray.push("Logistics");
+                }
+                else if (data[i].divIds == 4) {
+                    salesCount = data[i].count;
+                    divCountArray.push(salesCount);
+                    labelArray.push("Sales Ops");
+                }
+                else if (data[i].divIds == 5) {
+                    canaanCount = data[i].count;
+                    divCountArray.push(canaanCount);
+                    labelArray.push("Canaan Farm");
+                }
+            }
+            var data1 = {
+                labels: ["FAMS", "CAD", "Logistics", "Sales Ops", "Canaan Farm"],
+                datasets: [
+                    {
+                        label: "Divisions",
+                        data : divCountArray,
+                        backgroundColor: [
+                            '#00c0ef',
+                            '#f39c12',
+                            '#f56954',
+                            '#00a65a',
+                            '#3c8dbc'
+                        ]
+                    }
+                ]
+            };
+            var chart1 = new Chart(ctx1, {
+                type: "doughnut",
+                data: data1,
+                options: optChart
+            });
+            GetAllPositionStatus();
+        });
+    }
+    GetDivisionNumbers();
 });

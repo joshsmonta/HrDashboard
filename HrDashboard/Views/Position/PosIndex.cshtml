@@ -234,7 +234,34 @@
                 var divId = $("#secretDivId").val();
                 var deptId = $("#secretDeptId").val();
                 var sectId = $("#secretSectId").val();
-
+                var unitId = 0;
+                if (businessUnit == "Sonic One") {
+                    unitId = 1;
+                }
+                else if (businessUnit == "Sonic Two") {
+                    unitId = 2;
+                }
+                else if (businessUnit == "Sonic Three") {
+                    unitId = 3;
+                }
+                else if (businessUnit == "UFS") {
+                    unitId = 4;
+                }
+                else if (businessUnit == "Selecta") {
+                    unitId = 5;
+                }
+                else if (businessUnit == "Goodyear") {
+                    unitId = 6;
+                }
+                else if (businessUnit == "Komeya") {
+                    unitId = 7;
+                }
+                else if (businessUnit == "Canaan") {
+                    unitId = 8;
+                }
+                else if (businessUnit == "Shared") {
+                    unitId = 9;
+                }
                 var vm = {
                     "posName": posName,
                     "posStatus": "Vacant",
@@ -246,7 +273,8 @@
                     "businessUnit": businessUnit,
                     "divId": divId,
                     "deptId": deptId,
-                    "sectId": sectId
+                    "sectId": sectId,
+                    "unitId": unitId
                 };
 
                 $.ajax({

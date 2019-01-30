@@ -73,8 +73,8 @@ namespace HrDashboard.Controllers.Api
                              a.PresentPosition,
                              p.Position.PosType,
                              p.Position.BusinessUnit
-                         }).SingleOrDefault();
-            return Ok(query);
+                         });
+            return Ok(query.ToList());
         }
         
         [Route("api/plantilla/dept/count/{deptId}")]

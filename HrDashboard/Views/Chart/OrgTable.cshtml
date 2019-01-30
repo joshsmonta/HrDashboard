@@ -31,7 +31,6 @@
                 <div class="box-header">
                     <h3 class="box-title">Vacant Positions</h3>
                 </div>
-
                 <div class="box-body">
                     <table id="Table2" class="table table-bordered table-hover" style="width:100%">
                         <thead>
@@ -61,42 +60,22 @@
             var IsByBU = localStorage.getItem("byBuIndicator");
             var activeDeptUrl = "";
             var vacantDeptUrl = "";
-            if (IsByBU == 0) {
-                activeDeptUrl = "/api/plantilla/dept/" + deptId;
-                vacantDeptUrl = "/api/position/dept/openpos/" + deptId;
+
+            function InitializeLink(IsByBu) {
+                if (IsByBU == 1) {
+                    activeDeptUrl = "/api/plantilla/deptunit/" + deptId + "/" + unitId;
+                    vacantDeptUrl = "/api/position/deptunit/openpos/" + deptId + "/" + unitId;
+                }
+                else {
+                    activeDeptUrl = "/api/plantilla/dept/" + deptId;
+                    vacantDeptUrl = "/api/position/dept/openpos/" + deptId;
+                }
             }
-            else if (IsByBU == 1) {
-                activeDeptUrl = "/api/plantilla/deptunit/" + deptId + "/" + unitId;
-                vacantDeptUrl = "/api/position/deptunit/openpos/" + deptId + "/" + unitId;
-            }
+            InitializeLink(IsByBU);
 
-            $.ajax({
-                type: "GET",
-                url: "/api/department/name/" + deptId,
-                dataType: "json"
-            }).done(function (data) {
-                document.getElementById("deptName").innerHTML = data.deptName;
-            });
-
-            var table = $("#Table").DataTable({
-                ajax: {
-                    url: activeDeptUrl,
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "id",
-                        render: function (data, type, alphalist) {
-                            return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
-                        }
-                    },
-                    { data: "presentPosition" },
-                    { data: "posType" },
-                    { data: "businessUnit" }
-                ]
-            });
-
-            var table2 = $("#Table2").DataTable({
+            
+            function InitTable2() {
+                var table2 = $("#Table2").DataTable({
                 ajax: {
                     url: vacantDeptUrl,
                     dataSrc: ""
@@ -113,9 +92,38 @@
                         }
                     }
                 ]
+                });
+            }
+            function InitTable1() {
+                var table = $("#Table").DataTable({
+                ajax: {
+                    url: activeDeptUrl,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id",
+                        render: function (data, type, alphalist) {
+                            return "<a href='/alphalist/ATDetails/" + alphalist.id + "'>" + alphalist.firstName + " " + alphalist.middleName + " " + alphalist.lastName + "</a>";
+                        }
+                    },
+                    { data: "presentPosition" },
+                    { data: "posType" },
+                    { data: "businessUnit" }
+                ]
+                });
+                InitTable2();
+            } 
+            $.ajax({
+                type: "GET",
+                url: "/api/department/name/" + deptId,
+                dataType: "json"
+            }).done(function (data) {
+                document.getElementById("deptName").innerHTML = data.deptName;
+                InitTable1();
             });
 
-            $("#Table").on("click", ".js-delete", function () {
+            $("#Table2").on("click", ".js-delete", function () {
                 var deleteBtn = $(this);
                 bootbox.confirm("Are you sure you want to <b>Deactivate</b> this position?", function (result) {
                     if (result) {

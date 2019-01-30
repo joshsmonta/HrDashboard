@@ -23,8 +23,11 @@ namespace HrDashboard.Models
         public int SectId { get; set; }
         public bool Head { get; set; }
         public string BusinessUnit { get; set; }
-        public BusinessUnit BUnit { get; set; }
 
+
+        public int unitId { get; set; }
+        [JsonIgnore]
+        public BusinessUnit BUnit { get; set; }
         [JsonIgnore]
         public virtual Division Division { get; set; }
         [JsonIgnore]

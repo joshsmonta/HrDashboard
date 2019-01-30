@@ -23,7 +23,6 @@ namespace HrDashboard.Controllers.Api
         {
             context.Dispose();
         }
-        
         //api/position/
         public IEnumerable<PositionDto> GetPositions(string query = null)
         {
@@ -80,6 +79,51 @@ namespace HrDashboard.Controllers.Api
                 .ToList()
                 .Select(Mapper.Map<Position, PositionDto>);
             return activePos;
+        }
+
+        //All Division Position Chart
+        [HttpGet]
+        [Route("api/position/allposperdiv")]
+        public IHttpActionResult GetAllPositionPerDiv()
+        {
+            var position = (from p in context.Positions
+                            group p by p.DivId into g
+                            select new
+                            {
+                                divIds = g.Key,
+                                count = g.Count()
+                            });
+            return Ok(position);
+        }
+
+        //Position Pie Chart
+        [HttpGet]
+        [Route("api/position/allstatus")]
+        public IHttpActionResult GetAllPositionStatus()
+        {
+            var query = (from p in context.Positions
+                        group p by p.PosStatus into g
+                        select new
+                        {
+                            posStatus = g.Key,
+                            count = g.Count() 
+                        });
+            return Ok(query);
+        }
+
+        //For BU Pie Chart
+        [HttpGet]
+        [Route("api/position/countallbybu")]
+        public IHttpActionResult CountAllByBu()
+        {
+            var query = (from p in context.Positions
+                        group p by p.BusinessUnit into g
+                        select new
+                        {
+                            units = g.Key,
+                            count = g.Count()
+                        });
+            return Ok(query);
         }
 
         [HttpPut]
