@@ -15,14 +15,11 @@ namespace HrDashboard.Controllers.Api
     {
         private HRContext context;
         public PlantillaController()
-        {
-            context = new HRContext();
+        { context = new HRContext();
         }
 
         protected override void Dispose(bool disposing)
-        {
-            context.Dispose();
-        }
+        { context.Dispose(); }
 
         [Route("api/plantilla/update")]
         [HttpPost]

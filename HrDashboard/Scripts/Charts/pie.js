@@ -2,11 +2,6 @@
     var ctx1 = $("#pieChart1");
     var ctx2 = $("#pieChart2");
     var ctx3 = $("#pieChart3");
-    var famsCount = 0;
-    var cadCount = 0;
-    var logCount = 0;
-    var salesCount = 0;
-    var canaanCount = 0;
     var optChart = {
         legend: {
             display: true,
@@ -138,33 +133,33 @@
         }).done(function (data) {
             for (var i = 0; i < data.length; i++) {
                 if (data[i].divIds == 1) {
-                    famsCount = data[i].count;
+                    var famsCount = data[i].count;
                     divCountArray.push(famsCount);
                     labelArray.push("FAMS");
                 }
                 else if (data[i].divIds == 2) {
-                    cadCount = data[i].count;
+                    var cadCount = data[i].count;
                     divCountArray.push(cadCount);
                     labelArray.push("CAD");
                 }
                 else if (data[i].divIds == 3) {
-                    logCount = data[i].count;
+                    var logCount = data[i].count;
                     divCountArray.push(logCount);
                     labelArray.push("Logistics");
                 }
                 else if (data[i].divIds == 4) {
-                    salesCount = data[i].count;
+                    var salesCount = data[i].count;
                     divCountArray.push(salesCount);
                     labelArray.push("Sales Ops");
                 }
                 else if (data[i].divIds == 5) {
-                    canaanCount = data[i].count;
+                    var canaanCount = data[i].count;
                     divCountArray.push(canaanCount);
                     labelArray.push("Canaan Farm");
                 }
             }
             var data1 = {
-                labels: ["FAMS", "CAD", "Logistics", "Sales Ops", "Canaan Farm"],
+                labels: labelArray,
                 datasets: [
                     {
                         label: "Divisions",

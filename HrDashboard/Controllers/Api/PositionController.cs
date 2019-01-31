@@ -15,14 +15,10 @@ namespace HrDashboard.Controllers.Api
     {
         private HRContext context;
         public PositionController()
-        {
-            context = new HRContext();
-        }
+        { context = new HRContext(); }
 
         protected override void Dispose(bool disposing)
-        {
-            context.Dispose();
-        }
+        { context.Dispose(); }
         //api/position/
         public IEnumerable<PositionDto> GetPositions(string query = null)
         {
@@ -37,7 +33,6 @@ namespace HrDashboard.Controllers.Api
             }
             return positionQuery;
         }
-
         //get all vacant position by unitId
         [Route("api/position/unit/vacant/{id}")]
         [HttpGet]
@@ -48,7 +43,6 @@ namespace HrDashboard.Controllers.Api
                          select p).Count();
             return Ok(count);
         }
-
         //get all vacant position via deptId
         [Route("api/position/dept/openpos/{deptId}")]
         [HttpGet]
@@ -59,7 +53,6 @@ namespace HrDashboard.Controllers.Api
                          select p);
             return Ok(query.ToList());
         }
-
         //get all vacant position via deptId
         [Route("api/position/deptunit/openpos/{deptId}/{unitId}")]
         [HttpGet]
