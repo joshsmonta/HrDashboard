@@ -19,7 +19,6 @@ namespace HrDashboard.Controllers
         {
             context = new HRContext();
         }
-
         protected override void Dispose(bool disposing)
         {
             context.Dispose();
