@@ -51,6 +51,7 @@ namespace HrDashboard
                 .Include("~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
                 .Include("~/Scripts/moment.min.js")
                 .Include("~/Scripts/ui-bootstrap.min.js")
+                .Include("~/Content/jsPDF/dist/jspdf.min.js")
                 );
             BundleTable.EnableOptimizations = false;
         }

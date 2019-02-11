@@ -4,6 +4,7 @@
 }
 
 <section class="content-header">
+    
 </section>
 <section class="content">
     <div class="row">
@@ -13,6 +14,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Division</h3>
                         <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" onclick="DownloadDivPDF()"><i class="fa fa-download"></i></button>
                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                 <i class="fa fa-minus"></i>
                             </button>
@@ -30,6 +32,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Active / Vacant</h3>
                         <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" onclick="DownloadStatusPDF()"><i class="fa fa-download"></i></button>
                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                 <i class="fa fa-minus"></i>
                             </button>
@@ -50,6 +53,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Business Units</h3>
                         <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" onclick="DownloadUnitsPDF()"><i class="fa fa-download"></i></button>
                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                 <i class="fa fa-minus"></i>
                             </button>
@@ -68,6 +72,41 @@
 
 @section scripts
 {
+    <script>
+        var currentDate = new Date();
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+        var year = currentDate.getFullYear();
+        var dateString = date + "-" +(month + 1) + "-" + year;
+
+        function DownloadDivPDF() {
+            var newCanvas = document.querySelector('#pieChart1');
+            var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
+            var doc = new jsPDF("landscape");
+            doc.setFontSize(20);
+            doc.text(15,15,"Division Pie Chart");
+            doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150);
+            doc.save(dateString + 'divCanvas.pdf');
+        }
+        function DownloadStatusPDF() {
+            var newCanvas = document.querySelector('#pieChart2');
+            var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
+            var doc = new jsPDF("landscape");
+            doc.setFontSize(20);
+            doc.text(15, 15, "Status Pie Chart");
+            doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150);
+            doc.save(dateString + 'statCanvas.pdf');
+        }
+        function DownloadUnitsPDF() {
+            var newCanvas = document.querySelector('#pieChart3');
+            var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
+            var doc = new jsPDF("landscape");
+            doc.setFontSize(20);
+            doc.text(15, 15, "Business Unit PDF");
+            doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150);
+            doc.save(dateString + 'unitCanvas.pdf')
+        }
+    </script>
     <script src="~/Scripts/Charts/pie.js"></script>
 }
 

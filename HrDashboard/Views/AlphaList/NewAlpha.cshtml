@@ -394,7 +394,8 @@
                             return $.map(positions, function (position) {
                                 return {
                                     posId: position.posId,
-                                    posName: position.posName
+                                    posName: position.posName,
+                                    businessUnit: position.businessUnit
                                 };
                             });
                         }
@@ -412,7 +413,7 @@
                         source: positions,
                         templates: {
                             suggestion: function (data) {
-                                return '<p><strong>' + data.posName + '</strong> – ' + data.posId + '</p>';
+                                return '<p><strong>' + data.posName + '</strong> – ' + data.businessUnit + '</p>';
                             }
                         }
                     }).on("typeahead:select", function (e, position) {

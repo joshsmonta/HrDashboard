@@ -2,6 +2,7 @@
     var ctx1 = $("#pieChart1");
     var ctx2 = $("#pieChart2");
     var ctx3 = $("#pieChart3");
+
     var optChart = {
         legend: {
             display: true,
