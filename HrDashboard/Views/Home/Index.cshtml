@@ -3,9 +3,7 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 
-<section class="content-header">
-    
-</section>
+<section class="content-header"></section>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -26,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-xs-6">
                 <div class="box box-danger">
                     <div class="box-header with-border">
@@ -72,19 +70,20 @@
 
 @section scripts
 {
+    <script src="~/Scripts/Charts/pie.js"></script>
     <script>
         var currentDate = new Date();
         var date = currentDate.getDate();
         var month = currentDate.getMonth(); //Be careful! January is 0 not 1
         var year = currentDate.getFullYear();
-        var dateString = date + "-" +(month + 1) + "-" + year;
+        var dateString = date + "-" + (month + 1) + "-" + year;
 
         function DownloadDivPDF() {
             var newCanvas = document.querySelector('#pieChart1');
             var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
             var doc = new jsPDF("landscape");
             doc.setFontSize(20);
-            doc.text(15,15,"Division Pie Chart");
+            doc.text(15, 15, "Division Pie Chart");
             doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150);
             doc.save(dateString + 'divCanvas.pdf');
         }
@@ -107,6 +106,5 @@
             doc.save(dateString + 'unitCanvas.pdf')
         }
     </script>
-    <script src="~/Scripts/Charts/pie.js"></script>
 }
 

@@ -2,11 +2,11 @@
     var ctx1 = $("#pieChart1");
     var ctx2 = $("#pieChart2");
     var ctx3 = $("#pieChart3");
-
     var optChart = {
         legend: {
             display: true,
-            position: "left"
+            position: "left",
+            animationEasing: 'easeInOutQuart'
         }
     };
     function GetAllEmpsByBu() {
@@ -73,8 +73,8 @@
                     ]
                 }]
             }
-            var chart3 = new Chart(ctx3, {
-                type: "doughnut",
+            new Chart(ctx3, {
+                type: "pie",
                 data: data3,
                 options: optChart
             });
@@ -116,8 +116,8 @@
                     }
                 ]
             };
-            var chart2 = new Chart(ctx2, {
-                type: "doughnut",
+            new Chart(ctx2, {
+                type: 'pie',
                 data: data2,
                 options: optChart
             });
@@ -175,8 +175,8 @@
                     }
                 ]
             };
-            var chart1 = new Chart(ctx1, {
-                type: "doughnut",
+            new Chart(ctx1, {
+                type: 'pie',
                 data: data1,
                 options: optChart
             });
