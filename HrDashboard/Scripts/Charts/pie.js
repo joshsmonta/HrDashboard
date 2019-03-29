@@ -74,7 +74,7 @@
                 }]
             }
             new Chart(ctx3, {
-                type: "pie",
+                type: "doughnut",
                 data: data3,
                 options: optChart
             });
@@ -117,7 +117,7 @@
                 ]
             };
             new Chart(ctx2, {
-                type: 'pie',
+                type: 'doughnut',
                 data: data2,
                 options: optChart
             });
@@ -176,7 +176,7 @@
                 ]
             };
             new Chart(ctx1, {
-                type: 'pie',
+                type: 'doughnut',
                 data: data1,
                 options: optChart
             });
