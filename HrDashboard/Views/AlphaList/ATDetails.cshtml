@@ -53,6 +53,14 @@
                                         <td>@Model.DateOfBirth</td>
                                     </tr>
                                     <tr>
+                                        <th>Age</th>
+                                        @{
+                                            var date = DateTime.Now.Date.Subtract(Model.DateOfBirth);
+                                            var years = date.Days / 365;
+                                            <td>@years</td>
+                                        }
+                                    </tr>
+                                    <tr>
                                         <th>Sex: </th>
                                         <td>@Model.Sex</td>
                                     </tr>
