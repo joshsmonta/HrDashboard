@@ -7,13 +7,13 @@ namespace HrDashboard.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class EditAlphaListKey : IMigrationMetadata
+    public sealed partial class InitialStart : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EditAlphaListKey));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialStart));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811270855206_EditAlphaListKey"; }
+            get { return "201903290747147_InitialStart"; }
         }
         
         string IMigrationMetadata.Source

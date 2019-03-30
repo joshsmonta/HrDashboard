@@ -225,89 +225,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810260319416_InitMigration.cs" />
-    <Compile Include="Migrations\201810260319416_InitMigration.Designer.cs">
-      <DependentUpon>201810260319416_InitMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811030752256_DeleteAgeYearsOfServiceColumns.cs" />
-    <Compile Include="Migrations\201811030752256_DeleteAgeYearsOfServiceColumns.Designer.cs">
-      <DependentUpon>201811030752256_DeleteAgeYearsOfServiceColumns.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811060853074_InitOrganizationTables.cs" />
-    <Compile Include="Migrations\201811060853074_InitOrganizationTables.Designer.cs">
-      <DependentUpon>201811060853074_InitOrganizationTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811060912449_ConnectPositionsToAlphaList.cs" />
-    <Compile Include="Migrations\201811060912449_ConnectPositionsToAlphaList.Designer.cs">
-      <DependentUpon>201811060912449_ConnectPositionsToAlphaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811060924085_DeleteDivisionDeptSectionInAlphaList.cs" />
-    <Compile Include="Migrations\201811060924085_DeleteDivisionDeptSectionInAlphaList.Designer.cs">
-      <DependentUpon>201811060924085_DeleteDivisionDeptSectionInAlphaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811070950235_AddPosTypeInPosition.cs" />
-    <Compile Include="Migrations\201811070950235_AddPosTypeInPosition.Designer.cs">
-      <DependentUpon>201811070950235_AddPosTypeInPosition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811090400229_AddHeadColumnInPositionTable.cs" />
-    <Compile Include="Migrations\201811090400229_AddHeadColumnInPositionTable.Designer.cs">
-      <DependentUpon>201811090400229_AddHeadColumnInPositionTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811130927256_AssignForeignKeyToAlphaList.cs" />
-    <Compile Include="Migrations\201811130927256_AssignForeignKeyToAlphaList.Designer.cs">
-      <DependentUpon>201811130927256_AssignForeignKeyToAlphaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811140947000_AddBusinessUnitInPositionTable.cs" />
-    <Compile Include="Migrations\201811140947000_AddBusinessUnitInPositionTable.Designer.cs">
-      <DependentUpon>201811140947000_AddBusinessUnitInPositionTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811150321101_FixAlphaListBug.cs" />
-    <Compile Include="Migrations\201811150321101_FixAlphaListBug.Designer.cs">
-      <DependentUpon>201811150321101_FixAlphaListBug.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811230845118_InitialPlantilla.cs" />
-    <Compile Include="Migrations\201811230845118_InitialPlantilla.Designer.cs">
-      <DependentUpon>201811230845118_InitialPlantilla.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811260341209_FixPositionTable.cs" />
-    <Compile Include="Migrations\201811260341209_FixPositionTable.Designer.cs">
-      <DependentUpon>201811260341209_FixPositionTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811270855206_EditAlphaListKey.cs" />
-    <Compile Include="Migrations\201811270855206_EditAlphaListKey.Designer.cs">
-      <DependentUpon>201811270855206_EditAlphaListKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811280713012_PlantillaTableFix.cs" />
-    <Compile Include="Migrations\201811280713012_PlantillaTableFix.Designer.cs">
-      <DependentUpon>201811280713012_PlantillaTableFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812120656296_NullablePosIdInAlphaList.cs" />
-    <Compile Include="Migrations\201812120656296_NullablePosIdInAlphaList.Designer.cs">
-      <DependentUpon>201812120656296_NullablePosIdInAlphaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812270214431_AddStatusToAlphalist.cs" />
-    <Compile Include="Migrations\201812270214431_AddStatusToAlphalist.Designer.cs">
-      <DependentUpon>201812270214431_AddStatusToAlphalist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901040126248_LogBookTable.cs" />
-    <Compile Include="Migrations\201901040126248_LogBookTable.Designer.cs">
-      <DependentUpon>201901040126248_LogBookTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901070313127_BusinessUnitTable.cs" />
-    <Compile Include="Migrations\201901070313127_BusinessUnitTable.Designer.cs">
-      <DependentUpon>201901070313127_BusinessUnitTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901160855167_AddFileNameToAlphaList.cs" />
-    <Compile Include="Migrations\201901160855167_AddFileNameToAlphaList.Designer.cs">
-      <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901190734048_AdditionalColumnsInBetaList.cs" />
-    <Compile Include="Migrations\201901190734048_AdditionalColumnsInBetaList.Designer.cs">
-      <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.cs" />
-    <Compile Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.Designer.cs">
-      <DependentUpon>201901300249229_FixBusinessUnitModelInPositionModel.cs</DependentUpon>
+    <Compile Include="Migrations\201903290747147_InitialStart.cs" />
+    <Compile Include="Migrations\201903290747147_InitialStart.Designer.cs">
+      <DependentUpon>201903290747147_InitialStart.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelInitialize\HRView.cs" />
@@ -7887,6 +7807,7 @@
     <Content Include="Content\dist\css\skins\skin-yellow.min.css" />
     <Content Include="Content\dist\css\skins\_all-skins.css" />
     <Content Include="Content\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Content\dist\css\style.css" />
     <Content Include="Content\dist\img\avatar.png" />
     <Content Include="Content\dist\img\avatar04.png" />
     <Content Include="Content\dist\img\avatar2.png" />
@@ -9249,6 +9170,14 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\sitemap.xml" />
+    <Content Include="Scripts\test-bundles\angular-aria.js" />
+    <Content Include="Scripts\test-bundles\angular-cookies.js" />
+    <Content Include="Scripts\test-bundles\angular-message-format.js" />
+    <Content Include="Scripts\test-bundles\angular-messages.js" />
+    <Content Include="Scripts\test-bundles\angular-resource.js" />
+    <Content Include="Scripts\test-bundles\angular-route.js" />
+    <Content Include="Scripts\test-bundles\angular-sanitize.js" />
+    <Content Include="Scripts\test-bundles\angular-touch.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
@@ -9256,6 +9185,7 @@
     <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Scripts\ui-bootstrap.min.js" />
+    <Content Include="Views\AlphaList\uploadfile.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -9326,68 +9256,8 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810260319416_InitMigration.resx">
-      <DependentUpon>201810260319416_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811030752256_DeleteAgeYearsOfServiceColumns.resx">
-      <DependentUpon>201811030752256_DeleteAgeYearsOfServiceColumns.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811060853074_InitOrganizationTables.resx">
-      <DependentUpon>201811060853074_InitOrganizationTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811060912449_ConnectPositionsToAlphaList.resx">
-      <DependentUpon>201811060912449_ConnectPositionsToAlphaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811060924085_DeleteDivisionDeptSectionInAlphaList.resx">
-      <DependentUpon>201811060924085_DeleteDivisionDeptSectionInAlphaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811070950235_AddPosTypeInPosition.resx">
-      <DependentUpon>201811070950235_AddPosTypeInPosition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811090400229_AddHeadColumnInPositionTable.resx">
-      <DependentUpon>201811090400229_AddHeadColumnInPositionTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811130927256_AssignForeignKeyToAlphaList.resx">
-      <DependentUpon>201811130927256_AssignForeignKeyToAlphaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811140947000_AddBusinessUnitInPositionTable.resx">
-      <DependentUpon>201811140947000_AddBusinessUnitInPositionTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811150321101_FixAlphaListBug.resx">
-      <DependentUpon>201811150321101_FixAlphaListBug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811230845118_InitialPlantilla.resx">
-      <DependentUpon>201811230845118_InitialPlantilla.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811260341209_FixPositionTable.resx">
-      <DependentUpon>201811260341209_FixPositionTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811270855206_EditAlphaListKey.resx">
-      <DependentUpon>201811270855206_EditAlphaListKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811280713012_PlantillaTableFix.resx">
-      <DependentUpon>201811280713012_PlantillaTableFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812120656296_NullablePosIdInAlphaList.resx">
-      <DependentUpon>201812120656296_NullablePosIdInAlphaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812270214431_AddStatusToAlphalist.resx">
-      <DependentUpon>201812270214431_AddStatusToAlphalist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901040126248_LogBookTable.resx">
-      <DependentUpon>201901040126248_LogBookTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901070313127_BusinessUnitTable.resx">
-      <DependentUpon>201901070313127_BusinessUnitTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901160855167_AddFileNameToAlphaList.resx">
-      <DependentUpon>201901160855167_AddFileNameToAlphaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901190734048_AdditionalColumnsInBetaList.resx">
-      <DependentUpon>201901190734048_AdditionalColumnsInBetaList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901300249229_FixBusinessUnitModelInPositionModel.resx">
-      <DependentUpon>201901300249229_FixBusinessUnitModelInPositionModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903290747147_InitialStart.resx">
+      <DependentUpon>201903290747147_InitialStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
