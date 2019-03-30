@@ -104,6 +104,7 @@
         angular.module("createPos", ['ui.bootstrap']).controller('posController', ['$scope', '$http', function ($scope, $http) {
 
             $scope.positionTypes = [
+                { 'name': 'Officer' },
                 { 'name': 'Rank & File' },
                 { 'name': 'Division Head' },
                 { 'name': 'Department Head' },
@@ -206,6 +207,17 @@
                     $scope.enableSec = false;
                     $scope.checkBoxModel = true;
                 } else if ($scope.item.name == "Section Head") {
+                    $("#inDivision").val("");
+                    $('#inDept').val("");
+                    $('#inSection').val("");
+                    $("#secretDivId").val("");
+                    $("#secretDeptId").val("");
+                    $("#secretSectId").val("");
+                    $scope.enableDiv = true;
+                    $scope.enableDept = true;
+                    $scope.enableSec = true;
+                    $scope.checkBoxModel = true;
+                } else {
                     $("#inDivision").val("");
                     $('#inDept').val("");
                     $('#inSection').val("");
