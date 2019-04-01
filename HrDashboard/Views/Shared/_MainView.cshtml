@@ -245,10 +245,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("PosIndex", "Position")"><i class="fa fa-user-plus"></i> Add New Positions</a></li>
-                            <li><a href="@Url.Action("ActivePositions", "Position")"><i class="fa fa-circle"></i> Occupied Positions</a></li>
-                            <li><a href="@Url.Action("InactivePosition", "Position")"><i class="fa fa-frown-o"></i> Inactive Positions</a></li>
-                            <li><a href="@Url.Action("VacantPositions", "Position")"><i class="fa fa-circle-o"></i> Vacant Positions</a></li>
+                            <li><a id="addpos" href="@Url.Action("PosIndex", "Position")"><i class="fa fa-user-plus"></i> Add New Positions</a></li>
+                            <li><a id="occpos" href="@Url.Action("ActivePositions", "Position")"><i class="fa fa-circle"></i> Occupied Positions</a></li>
+                            <li><a id="inapos" href="@Url.Action("InactivePosition", "Position")"><i class="fa fa-frown-o"></i> Inactive Positions</a></li>
+                            <li><a id="vacpos" href="@Url.Action("VacantPositions", "Position")"><i class="fa fa-circle-o"></i> Vacant Positions</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -349,6 +349,19 @@
     <script>
         $(document).ready(function () {
             $('.sidebar-menu').tree();
+
+            $("#addpos").on("click", function () {
+                window.localStorage.setItem("editPosBool", 0);
+            });
+            $("#occpos").on("click", function () {
+                window.localStorage.setItem("editPosBool", 1);
+            });
+            $("#inapos").on("click", function () {
+                window.localStorage.setItem("editPosBool", 1);
+            });
+            $("#vacpos").on("click", function () {
+                window.localStorage.setItem("editPosBool", 1);
+            });
 
             $("#divFams").on("click", function () {
                 window.localStorage.setItem("byBuIndicator", 0);

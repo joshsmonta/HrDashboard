@@ -33,6 +33,17 @@ namespace HrDashboard.Controllers.Api
             }
             return positionQuery;
         }
+        
+        [HttpGet]
+        [Route("api/position/select/{posId}")]
+        public IHttpActionResult GetVacantPosition(int posId)
+        {
+            var position = context.Positions.SingleOrDefault(p => p.PosId == posId);
+            if (position == null)
+            { return NotFound(); }
+            return Ok(Mapper.Map<Position, PositionDto>(position));
+        }
+
         //get all vacant position by unitId
         [Route("api/position/unit/vacant/{id}")]
         [HttpGet]
@@ -117,6 +128,22 @@ namespace HrDashboard.Controllers.Api
                             count = g.Count()
                         });
             return Ok(query);
+        }
+
+        [HttpPut]
+        [Route("api/position/edit/{id}")]
+        public IHttpActionResult EditPos(int id, PositionDto posDto)
+        {
+            if(!ModelState.IsValid)
+            { return BadRequest(); }
+
+            var pos = context.Positions.SingleOrDefault(p => p.PosId == id);
+            if(pos == null)
+            { return NotFound(); }
+
+            Mapper.Map(posDto, pos);
+            context.SaveChanges();
+            return Ok();
         }
 
         [HttpPut]
