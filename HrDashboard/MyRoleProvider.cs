@@ -9,6 +9,12 @@ namespace HRSystem
 {
     public class MyRoleProvider : RoleProvider
     {
+        private HRContext context;
+        public MyRoleProvider()
+        {
+            context = new HRContext();
+        }
+
         public override string ApplicationName
         {
             get => throw new NotImplementedException(); set => throw new NotImplementedException();
@@ -41,9 +47,8 @@ namespace HRSystem
 
         public override string[] GetRolesForUser(string username)
         {
-            HRContext context = new HRContext();
-            var roles = context.UsersDbSet.Where(c => c.Username == username || c.Email == username).FirstOrDefault().Roles;
-            string[] resultS = { roles.ToString() };
+            var roles = context.UsersDbSet.Where(c => c.Username == username).SingleOrDefault();
+            string[] resultS = { roles.Roles.ToString() };
             return resultS;
         }
 

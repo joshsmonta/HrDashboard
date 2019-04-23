@@ -10,7 +10,7 @@ namespace HrDashboard
 
         public CustomAuthorizeAttribute()
         {
-            ViewName = "AuthorizeFailed";
+            ViewName = "Error";
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)

@@ -33,9 +33,9 @@ namespace HrDashboard.Controllers.Api
             }
             return positionQuery;
         }
-        
-        [HttpGet]
+
         [Route("api/position/select/{posId}")]
+        [HttpGet]
         public IHttpActionResult GetVacantPosition(int posId)
         {
             var position = context.Positions.SingleOrDefault(p => p.PosId == posId);

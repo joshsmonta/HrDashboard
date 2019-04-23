@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_MainView.cshtml";
 }
 <section class="content-header">
-    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-    {
+
         <div id="buttons" class="form-group">
             <button type="button" data-aTeam-id="@Model.Id" class="btn btn-danger js-delete" style="display:inline-block; float:right" theBtnLink="@Url.Action("Index", "AlphaList")">
                 <span class="glyphicon glyphicon-remove"></span> Resign
@@ -14,7 +13,6 @@
                 <span class="glyphicon glyphicon-pencil"></span> Edit
             </button><br />
         </div>
-    }
 </section>
 <section class="content">
     <div class="row">

@@ -14,7 +14,7 @@
             <div class="box box-info">
                 <div class="box-header with-border">
                     @{
-                        if (ViewContext.HttpContext.User.IsInRole("Admin") && Model != null)
+                        if (Model != null)
                         {
                             <h3 class="box-title">Edit Position</h3>
                             <button id="js-delete" type="button" data-pos-id="@Model.PosId" class="btn btn-danger" ng-readonly="checked"

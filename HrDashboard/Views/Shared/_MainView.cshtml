@@ -279,8 +279,6 @@
                     </li>
 
                     <!--This is only visible to admins-->
-                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-                    {
                         <li class="header">Admin Options</li>
                         <li class="treeview">
                             <a href="#">
@@ -307,7 +305,6 @@
                                 <li><a href="@Url.Action("LogbookIndex", "Home")"><i class="fa fa-circle-o"></i> Logs</a></li>
                             </ul>
                         </li>
-                    }
                 </ul>
             </section>
             <!-- /.sidebar -->

@@ -49,7 +49,7 @@ namespace HrDashboard.Controllers.Api
                          join p in context.Plantillas on a.PosId equals p.Position.PosId
                          where p.Position.DeptId == deptId
                          select new {
-                             a.Id, a.FirstName, a.MiddleName, a.LastName, a.PresentPosition, p.Position.PosType, p.Position.BusinessUnit
+                             a.Id, a.FirstName, a.MiddleName, a.LastName, a.PresentPosition, a.AreaOfAssignment, p.Position.PosType, p.Position.BusinessUnit
                          });
             return Ok(query.ToList());
         }
@@ -68,6 +68,7 @@ namespace HrDashboard.Controllers.Api
                              a.MiddleName,
                              a.LastName,
                              a.PresentPosition,
+                             a.AreaOfAssignment,
                              p.Position.PosType,
                              p.Position.BusinessUnit
                          });

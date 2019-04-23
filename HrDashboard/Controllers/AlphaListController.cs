@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace HrDashboard.Controllers
 {
-    [CustomAuthorize(Roles = RoleName.Admin)]
     public class AlphaListController : Controller
     {
         HRContext context;
