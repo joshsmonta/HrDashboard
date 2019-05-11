@@ -74,6 +74,22 @@ namespace HrDashboard.Controllers.Api
         }
 
         [HttpPut]
+        [Route("api/alphalist/editPos/{posId}")]
+        public IHttpActionResult EditPositionAlpha(int posId, AlphaListDto alphaDto)
+        {
+            if (!ModelState.IsValid)
+            { return BadRequest(); }
+
+            var aTeam = context.AlphaLists.SingleOrDefault(c => c.PosId == posId);
+            if (aTeam == null)
+            { return NotFound(); }
+
+            Mapper.Map(alphaDto, aTeam);
+            context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPut]
         [Route("api/alphalist/archive/{id}")]
         public IHttpActionResult ArchiveMember(int id, AlphaListDto alphaDto)
         {

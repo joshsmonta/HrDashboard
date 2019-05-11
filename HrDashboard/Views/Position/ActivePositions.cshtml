@@ -19,6 +19,7 @@
                     <table id="Table" class="table table-bordered table-hover" style="width:100%">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Position</th>
                                 <th>Type</th>
                                 <th>Business Unit</th>
@@ -43,7 +44,13 @@
                     dataSrc: ""
                 },
                 columns: [
-                    { data: "posName" },
+                    { data: "posId" },
+                    {
+                        data: "posId",
+                        render: function (data, type, position) {
+                            return "<a href='/Position/PosEdit/" + position.posId + "'>" + position.posName + "</a>";
+                        } 
+                    },
                     { data: "posType" },
                     { data: "businessUnit" }
                 ]
