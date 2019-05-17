@@ -25,7 +25,6 @@ namespace HrDashboard.Controllers
 
         //Registration Action
         [HttpGet]
-        [CustomAuthorize(Roles = RoleName.Admin)]
         public ActionResult Registration()
         {
             return View();
